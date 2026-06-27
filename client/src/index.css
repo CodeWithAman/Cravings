@@ -1,14 +1,196 @@
 @import "tailwindcss";
 
-
 :root {
-  --primary: #001BB7;
-  --primary-text:#dfdff8;
-  --secondary: #0046FF;
-  --accent: #FF8040;
-  --success: #16A34A;
-  --error: #DC2626;
-  --warning: #F59E0B;
-  --background: #F5F1DC;
+  --primary: #f97316;
+  --primary-text: #fff7ed;
+  --secondary: #ef4444;
+  --accent: #f97316;
+  --success: #16a34a;
+  --error: #dc2626;
+  --warning: #f59e0b;
+  --background: #ffffff;
   --text: #111827;
+}
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+} */
+
+/* #root {
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+} */
+
+#root::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Page Transition ─── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.52);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse-orange {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+  }
+}
+
+/* ─── Animation Utility Classes ─── */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease both;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease both;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease both;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-orange {
+  animation: pulse-orange 2s ease-in-out infinite;
+}
+
+/* ─── Staggered Delay Helpers ─── */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+}
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* ─── Shimmer Button Effect ─── */
+.btn-shimmer {
+  background: linear-gradient(
+    90deg,
+    #f97316 0%,
+    #ef4444 40%,
+    #fb923c 60%,
+    #f97316 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* ─── Smooth Page Load ─── */
+.page-enter {
+  animation: fadeInUp 0.6s ease both;
+}
+
+.card-enter {
+  animation: scaleIn 0.5s ease both;
+}
+
+.left-enter {
+  animation: slideInLeft 0.6s ease both;
+}
+
+.right-enter {
+  animation: slideInRight 0.6s ease both;
 }
