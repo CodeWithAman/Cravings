@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../config/api.config.js";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -22,7 +23,14 @@ const Login = () => {
       password: loginData.password,
     };
     console.log("Login Data Submitted:", payload);
+    
     // API Call Here
+    try {
+      const res = await api.post("/auth/login", payload);
+      alert(res.data.message);
+    } catch (error) {
+      console.log(error.res?.data?.message || error.message);
+    }
   };
 
   const inputClass =
