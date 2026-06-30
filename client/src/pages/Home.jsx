@@ -6,12 +6,17 @@ import CheeseBurger from "../assets/cheeseburger.png";
 import ItalianPizza from "../assets/ItalianPizza.png";
 import ChickenBiryani from "../assets/ChickenBiryani.png";
 import Pasta from "../assets/Pasta.png";
+import {
+  FiTruck, FiStar, FiGift, FiCoffee,
+  FiPlusCircle, FiClock, FiPhone,
+} from "react-icons/fi";
+import { MdOutlineLocalPizza, MdOutlineFastfood, MdOutlineRamenDining, MdOutlineCake } from "react-icons/md";
 
 const categories = [
-  { icon: "🍕", title: "Pizza" },
-  { icon: "🍔", title: "Burger" },
-  { icon: "🍜", title: "Noodles" },
-  { icon: "🍰", title: "Dessert" },
+  { icon: <MdOutlineLocalPizza size={52} />, title: "Pizza" },
+  { icon: <MdOutlineFastfood size={52} />, title: "Burger" },
+  { icon: <MdOutlineRamenDining size={52} />, title: "Noodles" },
+  { icon: <MdOutlineCake size={52} />, title: "Dessert" },
 ];
 
 const foods = [
@@ -21,9 +26,17 @@ const foods = [
   { name: "Pasta", price: "₹229", img: Pasta },
 ];
 
+const features = [
+  { icon: <FiTruck size={36} />, title: "Fast Delivery", sub: "Order in minutes" },
+  { icon: <FiCoffee size={36} />, title: "Fresh Food", sub: "Always hot & fresh" },
+  { icon: <FiStar size={36} />, title: "Top Rated", sub: "5 star experience" },
+  { icon: <FiGift size={36} />, title: "Best Offers", sub: "Deals every day" },
+];
+
 const Home = () => {
   return (
     <div className="bg-gray-50">
+
       {/* ── Hero ── */}
       <section
         className="relative min-h-screen bg-cover bg-center"
@@ -32,14 +45,15 @@ const Home = () => {
         <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative z-10 max-w-7xl mx-auto min-h-screen px-6 sm:px-8 grid md:grid-cols-2 items-center gap-8 pt-24 pb-12">
+
           {/* Left Text */}
           <div className="text-white page-enter">
-            <span className="inline-block btn-shimmer px-4 py-2 rounded-full font-semibold text-sm sm:text-base">
-              Fast Delivery 🚚
+            <span className="inline-flex items-center gap-2 btn-shimmer px-4 py-2 rounded-full font-semibold text-sm sm:text-base">
+              <FiTruck size={16} /> Fast Delivery
             </span>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mt-6">
-              Delicious Food 
+              Delicious Food
               <br />
               Delivered
               <br />
@@ -61,9 +75,9 @@ const Home = () => {
 
               <Link
                 to="/contact-us"
-                className="border border-white px-8 py-3 rounded-xl text-white hover:bg-white hover:text-black duration-300 text-sm sm:text-base"
+                className="inline-flex items-center gap-2 border border-white px-8 py-3 rounded-xl text-white hover:bg-white hover:text-black duration-300 text-sm sm:text-base"
               >
-                Contact Us
+                <FiPhone size={15} /> Contact Us
               </Link>
             </div>
 
@@ -75,9 +89,7 @@ const Home = () => {
                 { value: "30min", label: "Avg Delivery" },
               ].map((s) => (
                 <div key={s.label}>
-                  <p className="text-2xl font-extrabold text-orange-400">
-                    {s.value}
-                  </p>
+                  <p className="text-2xl font-extrabold text-orange-400">{s.value}</p>
                   <p className="text-xs text-gray-300 mt-1">{s.label}</p>
                 </div>
               ))}
@@ -98,17 +110,12 @@ const Home = () => {
       {/* ── Features ── */}
       <section className="max-w-7xl mx-auto py-12 sm:py-16 px-6 sm:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {[
-            ["⚡", "Fast Delivery", "Order in minutes"],
-            ["🍴", "Fresh Food", "Always hot & fresh"],
-            ["⭐", "Top Rated", "5 star experience"],
-            ["🎁", "Best Offers", "Deals every day"],
-          ].map(([icon, title, sub]) => (
+          {features.map(({ icon, title, sub }) => (
             <div
               key={title}
               className="bg-white rounded-3xl shadow-lg p-6 sm:p-8 text-center hover:-translate-y-2 duration-300"
             >
-              <div className="text-4xl sm:text-5xl">{icon}</div>
+              <div className="flex justify-center text-orange-500">{icon}</div>
               <h3 className="font-bold text-base sm:text-xl mt-4">{title}</h3>
               <p className="text-gray-400 text-xs sm:text-sm mt-1">{sub}</p>
             </div>
@@ -127,7 +134,7 @@ const Home = () => {
               key={c.title}
               className="bg-linear-to-br from-orange-400 to-red-500 rounded-3xl p-6 sm:p-8 text-center text-white hover:scale-105 duration-300 cursor-pointer"
             >
-              <div className="text-5xl sm:text-6xl">{c.icon}</div>
+              <div className="flex justify-center">{c.icon}</div>
               <p className="mt-4 font-bold text-lg sm:text-xl">{c.title}</p>
             </div>
           ))}
@@ -138,12 +145,10 @@ const Home = () => {
       <section className="max-w-7xl mx-auto px-6 sm:px-8 pb-12 sm:pb-16">
         <div className="rounded-3xl bg-linear-to-r from-orange-500 via-red-500 to-pink-500 text-white p-8 sm:p-10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
-            <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
-              ⏰ Limited Time Offer
+            <span className="inline-flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
+              <FiClock size={13} /> Limited Time Offer
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold mt-3">
-              Get 50% OFF
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold mt-3">Get 50% OFF</h2>
             <p className="mt-2 text-white/80 text-sm sm:text-base">
               On your first order. Don't miss out!
             </p>
@@ -187,8 +192,8 @@ const Home = () => {
                     {food.price}
                   </span>
 
-                  <button className="btn-shimmer text-white px-4 py-2 rounded-xl text-sm font-semibold hover:scale-105 duration-300">
-                    Add +
+                  <button className="btn-shimmer inline-flex items-center gap-1.5 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:scale-105 duration-300">
+                    <FiPlusCircle size={15} /> Add
                   </button>
                 </div>
               </div>
@@ -196,6 +201,7 @@ const Home = () => {
           ))}
         </div>
       </section>
+
     </div>
   );
 };
