@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../config/api.config";
 
 const ContactUs = () => {
   const [contactData, setContactData] = useState({
@@ -17,7 +18,7 @@ const ContactUs = () => {
     setContactData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Contact Form:", contactData);
     setSuccessMessage("Your message has been sent successfully!");
@@ -28,6 +29,13 @@ const ContactUs = () => {
       subject: "",
       message: "",
     });
+
+    try {
+      const res = await api.post("/public/contactUs" , contactData);
+      alert(res.data.message);
+    } catch (error) {
+      console.log(error.res?.data?.message || error.message);
+    }
   };
 
   const inputClass =

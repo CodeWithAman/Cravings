@@ -2,16 +2,17 @@ import ContactUs from "../models/contact.model.js";
 
 export const ContactUsForm = async (req, res, next) => {
   try {
-    const { fullName, email, phone, subject, message } = req.body;
-
-    if (!fullName || !email || !phone || !subject || !message) {
+    
+    const { fullname, email, phone, subject, message } = req.body;
+    
+    if (!fullname || !email || !phone || !subject || !message) {
       const error = new Error("All Feilds Required");
       error.statusCode = 400;
       return next(error);
     }
 
     const NewContactMessage = await ContactUs.create({
-      fullName,
+      fullname,
       email,
       phone,
       subject,
