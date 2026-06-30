@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../config/api.config";
+import toast from "react-hot-toast";
 
 const ContactUs = () => {
   const [contactData, setContactData] = useState({
@@ -32,9 +33,9 @@ const ContactUs = () => {
 
     try {
       const res = await api.post("/public/contactUs" , contactData);
-      alert(res.data.message);
+      toast.success(res.data.message);
     } catch (error) {
-      console.log(error.res?.data?.message || error.message);
+      toast.error(error.res?.data?.message || error.message);
     }
   };
 
