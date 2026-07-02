@@ -2,6 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../config/api.config";
 import toast from "react-hot-toast";
+import {
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMessageSquare,
+  FiSend,
+  FiMapPin,
+  FiZap,
+  FiHeart,
+} from "react-icons/fi";
+import { MdOutlineFastfood } from "react-icons/md";
+import { MdOutlineMarkEmailRead } from "react-icons/md";
 
 const ContactUs = () => {
   const [contactData, setContactData] = useState({
@@ -32,189 +44,225 @@ const ContactUs = () => {
     });
 
     try {
-      const res = await api.post("/public/contactUs" , contactData);
+      const res = await api.post("/public/contactUs", contactData);
       toast.success(res.data.message);
     } catch (error) {
       toast.error(error.res?.data?.message || error.message);
     }
   };
 
+  const inputWithIcon =
+    "border-2 border-gray-200 rounded-xl pl-9 pr-3 py-2 text-sm bg-gray-50 focus:outline-none focus:border-orange-400 focus:bg-white transition w-full";
+
   const inputClass =
     "border-2 border-gray-200 rounded-xl px-4 py-2 text-sm bg-gray-50 focus:outline-none focus:border-orange-400 focus:bg-white transition w-full";
 
+  const tags = [
+    { icon: <FiMapPin size={12} />, label: "Bhopal" },
+    { icon: <FiPhone size={12} />, label: "24/7 Support" },
+    { icon: <FiZap size={12} />, label: "Fast Reply" },
+    { icon: <FiHeart size={12} />, label: "We Care" },
+  ];
+
   return (
-    <div className="page-enter h-screen overflow-hidden bg-linear-to-br from-gray-900 via-orange-950 to-gray-900 grid md:grid-cols-2 items-center px-8 pt-20 pb-4 gap-8">
-      {/* Left — Branding */}
-      <div className="left-enter hidden md:flex flex-col items-center justify-center gap-6 text-white">
-        <div className="flex items-center gap-3">
-          <span className="text-5xl">🍔</span>
-          <h1 className="text-4xl font-extrabold">
-            Crav<span className="text-orange-400">ings</span>
-          </h1>
-        </div>
+    <>
+      <div className="page-enter h-screen overflow-hidden bg-linear-to-br from-gray-900 via-orange-950 to-gray-900 grid md:grid-cols-2 items-center px-8 pt-20 pb-4 gap-8">
+        {/* Left — Branding */}
+        <div className="left-enter hidden md:flex flex-col items-center justify-center gap-6 text-white">
+          <div className="flex items-center gap-3">
+            <MdOutlineFastfood size={48} className="text-orange-400" />
+            <h1 className="text-4xl font-extrabold">
+              Crav<span className="text-orange-400">ings</span>
+            </h1>
+          </div>
 
-        <div className="text-7xl drop-shadow-2xl animate-bounce">📩</div>
+          <div className="animate-float drop-shadow-2xl text-orange-400">
+            <MdOutlineMarkEmailRead size={100} />
+          </div>
 
-        <p className="text-2xl font-bold text-center leading-snug">
-          We'd love to <span className="text-orange-400">hear from you.</span>
-          <br />
-          We're here to help!
-        </p>
+          <p className="text-2xl font-bold text-center leading-snug">
+            We'd love to <span className="text-orange-400">hear from you.</span>
+            <br />
+            We're here to help!
+          </p>
 
-        <div className="flex gap-3 flex-wrap justify-center">
-          {["📍 Mumbai", "📞 24/7 Support", "⚡ Fast Reply", "❤️ We Care"].map(
-            (tag) => (
+          <div className="flex gap-3 flex-wrap justify-center">
+            {tags.map((tag) => (
               <span
-                key={tag}
-                className="bg-orange-500/20 border border-orange-500/40 text-orange-300 rounded-full px-4 py-1.5 text-sm font-semibold"
+                key={tag.label}
+                className="inline-flex items-center gap-1.5 bg-orange-500/20 border border-orange-500/40 text-orange-300 rounded-full px-4 py-1.5 text-sm font-semibold"
               >
-                {tag}
+                {tag.icon} {tag.label}
               </span>
-            ),
-          )}
-        </div>
-      </div>
-
-      {/* Right — Contact Card */}
-      <div className="right-enter  flex items-center justify-center h-full overflow-hidden py-4">
-        <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6">
-          <div className="text-center mb-4">
-            <span className="inline-block bg-orange-50 border border-orange-200 text-orange-600 rounded-full text-xs font-semibold px-4 py-1.5 mb-2">
-              📩 Get in touch!
-            </span>
-            <h2 className="text-3xl font-extrabold text-gray-900">
-              Contact Us
-            </h2>
-            <p className="text-gray-500 text-sm mt-1">
-              Send us your message and we'll get back to you.
-            </p>
-          </div>
-
-          {successMessage && (
-            <div className="bg-green-50 border border-green-200 text-green-600 rounded-xl px-4 py-2.5 text-sm text-center mb-3">
-              ✅ {successMessage}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-3">
-            {/* Full Name */}
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-semibold text-gray-700">
-                Full Name
-              </label>
-              <input
-                type="text"
-                name="fullname"
-                value={contactData.fullname}
-                onChange={handleChange}
-                placeholder="John Doe"
-                required
-                className={inputClass}
-              />
-            </div>
-
-            {/* Email */}
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-semibold text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={contactData.email}
-                onChange={handleChange}
-                placeholder="you@example.com"
-                required
-                className={inputClass}
-              />
-            </div>
-
-            {/* Phone */}
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-semibold text-gray-700">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={contactData.phone}
-                onChange={handleChange}
-                placeholder="+91 98765 43210"
-                required
-                className={inputClass}
-              />
-            </div>
-
-            {/* Subject */}
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-semibold text-gray-700">
-                Subject
-              </label>
-              <input
-                type="text"
-                name="subject"
-                value={contactData.subject}
-                onChange={handleChange}
-                placeholder="How can we help you?"
-                required
-                className={inputClass}
-              />
-            </div>
-
-            {/* Message */}
-            <div className="col-span-2 flex flex-col gap-1">
-              <label className="text-xs font-semibold text-gray-700">
-                Message
-              </label>
-              <textarea
-                rows="3"
-                name="message"
-                value={contactData.message}
-                onChange={handleChange}
-                placeholder="Write your message here..."
-                required
-                className={`${inputClass} resize-none`}
-              />
-            </div>
-
-            {/* Submit */}
-            <button
-              type="submit"
-              className="col-span-2 w-full btn-shimmer text-white font-bold py-3 rounded-2xl hover:opacity-90 hover:scale-[1.01] transition-all duration-200 text-sm"
-            >
-              Send Message →
-            </button>
-          </form>
-
-          <div className="flex items-center gap-3 my-3">
-            <div className="flex-1 border-t border-gray-200" />
-            <span className="text-gray-400 text-xs">OR</span>
-            <div className="flex-1 border-t border-gray-200" />
-          </div>
-
-          <div className=" text-center space-y-1.5 gap-6 text-sm text-gray-500">
-            <p>
-              Already have an account?{" "}
-              <Link
-                to="/login"
-                className="text-orange-500 font-semibold hover:underline"
-              >
-                Login
-              </Link>
-            </p>
-            <p>
-              New here?{" "}
-              <Link
-                to="/register"
-                className="text-orange-500 font-semibold hover:underline"
-              >
-                Create an Account
-              </Link>
-            </p>
+            ))}
           </div>
         </div>
+
+        {/* Right — Contact Card */}
+        <div className="right-enter flex items-center justify-center h-full overflow-hidden py-4">
+          <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6">
+            <div className="text-center mb-4">
+              <span className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 text-orange-600 rounded-full text-xs font-semibold px-4 py-1.5 mb-2">
+                <MdOutlineMarkEmailRead size={13} /> Get in touch!
+              </span>
+              <h2 className="text-3xl font-extrabold text-gray-900">
+                Contact Us
+              </h2>
+              <p className="text-gray-500 text-sm mt-1">
+                Send us your message and we'll get back to you.
+              </p>
+            </div>
+
+            {successMessage && (
+              <div className="bg-green-50 border border-green-200 text-green-600 rounded-xl px-4 py-2.5 text-sm text-center mb-3 flex items-center justify-center gap-2">
+                <FiSend size={13} /> {successMessage}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-3">
+              {/* Full Name */}
+              <div className="flex flex-col gap-1">
+                <label className="text-xs font-semibold text-gray-700">
+                  Full Name
+                </label>
+                <div className="relative">
+                  <FiUser
+                    size={13}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  />
+                  <input
+                    type="text"
+                    name="fullname"
+                    value={contactData.fullname}
+                    onChange={handleChange}
+                    placeholder="John Doe"
+                    required
+                    className={inputWithIcon}
+                  />
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex flex-col gap-1">
+                <label className="text-xs font-semibold text-gray-700">
+                  Email
+                </label>
+                <div className="relative">
+                  <FiMail
+                    size={13}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={contactData.email}
+                    onChange={handleChange}
+                    placeholder="you@example.com"
+                    required
+                    className={inputWithIcon}
+                  />
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div className="flex flex-col gap-1">
+                <label className="text-xs font-semibold text-gray-700">
+                  Phone Number
+                </label>
+                <div className="relative">
+                  <FiPhone
+                    size={13}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  />
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={contactData.phone}
+                    onChange={handleChange}
+                    placeholder="+91 98765 43210"
+                    required
+                    className={inputWithIcon}
+                  />
+                </div>
+              </div>
+
+              {/* Subject */}
+              <div className="flex flex-col gap-1">
+                <label className="text-xs font-semibold text-gray-700">
+                  Subject
+                </label>
+                <div className="relative">
+                  <FiMessageSquare
+                    size={13}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  />
+                  <input
+                    type="text"
+                    name="subject"
+                    value={contactData.subject}
+                    onChange={handleChange}
+                    placeholder="How can we help you?"
+                    required
+                    className={inputWithIcon}
+                  />
+                </div>
+              </div>
+
+              {/* Message */}
+              <div className="col-span-2 flex flex-col gap-1">
+                <label className="text-xs font-semibold text-gray-700">
+                  Message
+                </label>
+                <textarea
+                  rows="3"
+                  name="message"
+                  value={contactData.message}
+                  onChange={handleChange}
+                  placeholder="Write your message here..."
+                  required
+                  className={`${inputClass} resize-none`}
+                />
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="col-span-2 w-full btn-shimmer inline-flex items-center justify-center gap-2 text-white font-bold py-3 rounded-2xl hover:opacity-90 hover:scale-[1.01] transition-all duration-200 text-sm"
+              >
+                <FiSend size={14} /> Send Message
+              </button>
+            </form>
+
+            <div className="flex items-center gap-3 my-3">
+              <div className="flex-1 border-t border-gray-200" />
+              <span className="text-gray-400 text-xs">OR</span>
+              <div className="flex-1 border-t border-gray-200" />
+            </div>
+
+            <div className="text-center space-y-1.5 text-sm text-gray-500">
+              <p>
+                Already have an account?{" "}
+                <Link
+                  to="/login"
+                  className="text-orange-500 font-semibold hover:underline"
+                >
+                  Login
+                </Link>
+              </p>
+              <p>
+                New here?{" "}
+                <Link
+                  to="/register"
+                  className="text-orange-500 font-semibold hover:underline"
+                >
+                  Create an Account
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
