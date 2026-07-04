@@ -1,24 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #f97316;
-  --primary-text: #fff7ed;
-  --secondary: #ef4444;
-  --accent: #f97316;
-  --success: #16a34a;
-  --error: #dc2626;
-  --warning: #f59e0b;
-  --background: #ffffff;
-  --text: #111827;
+  --color-primary: #c2410c;
+  --color-primary-content: #ffffff;
+  --color-secondary: #6b7280;
+  --color-neutral: #3f3f46;
+  --color-neutral-content: #f4f4f5;
+  --color-base-100: #fff8f1;
+  --color-base-200: #f5ede5;
+  --color-base-300: #e7d9c9;
+  --color-base-content: #2d1b10;
+  --color-error: #ef4444;
+  --color-success: #22c55e;
+  --color-accent: #d9468f
+;
 }
 
-
-#root::-webkit-scrollbar {
+/* #root::-webkit-scrollbar {
   display: none;
-}
+} */
 
 /* ─── Page Transition ─── */
-@keyframes fadeInUp {
+/* @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -27,9 +30,9 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -98,10 +101,10 @@
   50% {
     box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
   }
-}
+} */
 
 /* ─── Animation Utility Classes ─── */
-.animate-fade-in {
+/* .animate-fade-in {
   animation: fadeIn 0.5s ease both;
 }
 
@@ -127,10 +130,10 @@
 
 .animate-pulse-orange {
   animation: pulse-orange 2s ease-in-out infinite;
-}
+} */
 
 /* ─── Staggered Delay Helpers ─── */
-.delay-100 {
+/* .delay-100 {
   animation-delay: 0.1s;
 }
 .delay-200 {
@@ -144,7 +147,7 @@
 }
 .delay-500 {
   animation-delay: 0.5s;
-}
+} */
 
 /* ─── Shimmer Button Effect ─── */
 .btn-shimmer {
@@ -160,7 +163,7 @@
 }
 
 /* ─── Smooth Page Load ─── */
-.page-enter {
+/* .page-enter {
   animation: fadeInUp 0.6s ease both;
 }
 
@@ -174,4 +177,4 @@
 
 .right-enter {
   animation: slideInRight 0.6s ease both;
-}
+} */
