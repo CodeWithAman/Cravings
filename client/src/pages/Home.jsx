@@ -1,229 +1,414 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FoodBg from "../assets/food-bg.jpg";
-import HeroFood from "../assets/food.webp";
-import CheeseBurger from "../assets/cheeseburger.png";
-import ItalianPizza from "../assets/ItalianPizza.png";
-import ChickenBiryani from "../assets/ChickenBiryani.png";
-import Pasta from "../assets/Pasta.png";
-import {
-  FiTruck,
-  FiStar,
-  FiGift,
-  FiCoffee,
-  FiPlusCircle,
-  FiClock,
-  FiPhone,
-} from "react-icons/fi";
-import {
-  MdOutlineLocalPizza,
-  MdOutlineFastfood,
-  MdOutlineRamenDining,
-  MdOutlineCake,
-} from "react-icons/md";
-
-const categories = [
-  { icon: <MdOutlineLocalPizza size={52} />, title: "Pizza" },
-  { icon: <MdOutlineFastfood size={52} />, title: "Burger" },
-  { icon: <MdOutlineRamenDining size={52} />, title: "Noodles" },
-  { icon: <MdOutlineCake size={52} />, title: "Dessert" },
-];
-
-const foods = [
-  { name: "Cheese Burger", price: "₹199", img: CheeseBurger },
-  { name: "Italian Pizza", price: "₹349", img: ItalianPizza },
-  { name: "Chicken Biryani", price: "₹249", img: ChickenBiryani },
-  { name: "Pasta", price: "₹229", img: Pasta },
-];
-
-const features = [
-  {
-    icon: <FiTruck size={36} />,
-    title: "Fast Delivery",
-    sub: "Order in minutes",
-  },
-  {
-    icon: <FiCoffee size={36} />,
-    title: "Fresh Food",
-    sub: "Always hot & fresh",
-  },
-  { icon: <FiStar size={36} />, title: "Top Rated", sub: "5 star experience" },
-  { icon: <FiGift size={36} />, title: "Best Offers", sub: "Deals every day" },
-];
+import { IoSearch } from "react-icons/io5";
+import { IoIosStar } from "react-icons/io";
+import herobgImg from "../assets/hero-bg.jpg";
+import cardImg_1 from "../assets/restaurant-Image-1.avif";
+import cardImg_2 from "../assets/restaurant-Image-2.webp";
+import cardImg_3 from "../assets/restaurant-Image-3.webp";
+import cardImg_4 from "../assets/restaurant-Image-4.jpg";
 
 const Home = () => {
   return (
     <>
-      <div className="bg-gray-50">
-        {/* ── Hero ── */}
-        <section
-          className="relative min-h-screen bg-cover bg-center"
-          style={{ backgroundImage: `url(${FoodBg})` }}
-        >
-          <div className="absolute inset-0 bg-black/60" />
-
-          <div className="relative z-10 max-w-7xl mx-auto min-h-screen px-6 sm:px-8 grid md:grid-cols-2 items-center gap-8 pt-24 pb-12">
-            {/* Left Text */}
-            <div className="text-white page-enter">
-              <span className="inline-flex items-center gap-2 btn-shimmer px-4 py-2 rounded-full font-semibold text-sm sm:text-base">
-                <FiTruck size={16} /> Fast Delivery
-              </span>
-
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mt-6">
-                Delicious Food
-                <br />
-                Delivered
-                <br />
-                <span className="text-orange-400">To Your Door</span>
-              </h1>
-
-              <p className="mt-6 text-base sm:text-lg text-gray-200 max-w-xl">
-                Enjoy fresh meals from your favourite restaurants with lightning
-                fast delivery and amazing offers every day.
-              </p>
-
-              <div className="flex flex-wrap gap-4 mt-8">
-                <Link
-                  to="/"
-                  className="btn-shimmer px-8 py-3 rounded-xl text-white font-semibold hover:scale-105 hover:opacity-90 duration-300 text-sm sm:text-base"
-                >
-                  Order Now →
-                </Link>
-
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center gap-2 border border-white px-8 py-3 rounded-xl text-white hover:bg-white hover:text-black duration-300 text-sm sm:text-base"
-                >
-                  <FiPhone size={15} /> Contact Us
-                </Link>
+      <div className=" min-h-screen">
+        <section className=" relative text-(--color-primary-content) py-16 md:py-40 overflow-hidden">
+          <div className=" absolute inset-0 z-0">
+            <div className=" relative w-full h-full overflow-hidden">
+              <div className=" absolute inset-0 transition-opacity">
+                <img
+                  src={herobgImg}
+                  alt="slide 1"
+                  className=" w-full h-full object-cover"
+                />
               </div>
-
-              {/* Stats */}
-              <div className="flex gap-8 mt-10">
-                {[
-                  { value: "50K+", label: "Happy Customers" },
-                  { value: "200+", label: "Restaurants" },
-                  { value: "30min", label: "Avg Delivery" },
-                ].map((s) => (
-                  <div key={s.label}>
-                    <p className="text-2xl font-extrabold text-orange-400">
-                      {s.value}
-                    </p>
-                    <p className="text-xs text-gray-300 mt-1">{s.label}</p>
-                  </div>
-                ))}
+              <div></div>
+              <div></div>
+              <div></div>
+              <buttoon></buttoon>
+              <buttoon></buttoon>
+              <div></div>
+            </div>
+          </div>
+          <div className=" absolute inset-0 bg-black/40 z-10" />
+          <div className=" relative z-20  max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className=" text-center mb-8">
+              <h1 className=" text-4xl md:text-5xl font-bold mb-4">
+                Your Favorite Food,
+                <br />
+                Delivered Fast
+              </h1>
+              <p className=" text-lg md:text-xl opacity-90 mb-8">
+                Order from thousands of restaurants and get it delivered to your
+                doorstep
+              </p>
+              <div className=" flex gap-4 justify-center">
+                <button className=" bg-(--color-primary) text-(--color-primary-content) px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                  <Link to={"/register"}>Sign Up</Link>
+                </button>
+                <button className=" bg-(--color-base-100) text-(--color-base-content) px-8 py-3 rounded-lg font-semibold hover:bg-(--color-base-200) transition">
+                  <Link to={"/order-now"}>Order Now</Link>
+                </button>
               </div>
             </div>
-
-            {/* Right Image */}
-            <div className="hidden md:flex justify-center right-enter">
-              <img
-                src={HeroFood}
-                alt="Food"
-                className="w-80 lg:w-96 drop-shadow-2xl animate-float"
+            <div className=" flex items-center bg-(--color-base-100) rounded-lg px-4 py-3 max-w-4xl mx-auto">
+              <IoSearch className=" text-(--color-base-content) text-xl mr-3" />
+              <input
+                type="text"
+                placeholder="Search restaurants or dishes..."
+                className=" bg-(--color-base-100) w-full outline-none text-(--color-primary)"
               />
             </div>
           </div>
         </section>
 
-        {/* ── Features ── */}
-        <section className="max-w-7xl mx-auto py-12 sm:py-16 px-6 sm:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {features.map(({ icon, title, sub }) => (
-              <div
-                key={title}
-                className="bg-white rounded-3xl shadow-lg p-6 sm:p-8 text-center hover:-translate-y-2 duration-300"
-              >
-                <div className="flex justify-center text-orange-500">
-                  {icon}
-                </div>
-                <h3 className="font-bold text-base sm:text-xl mt-4">{title}</h3>
-                <p className="text-gray-400 text-xs sm:text-sm mt-1">{sub}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Popular Categories ── */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-8 pb-12 sm:pb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">
-            Popular <span className="text-orange-500">Categories</span>
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {categories.map((c) => (
-              <div
-                key={c.title}
-                className="bg-linear-to-br from-orange-400 to-red-500 rounded-3xl p-6 sm:p-8 text-center text-white hover:scale-105 duration-300 cursor-pointer"
-              >
-                <div className="flex justify-center">{c.icon}</div>
-                <p className="mt-4 font-bold text-lg sm:text-xl">{c.title}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Promo Banner ── */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-8 pb-12 sm:pb-16">
-          <div className="rounded-3xl bg-linear-to-r from-orange-500 via-red-500 to-pink-500 text-white p-8 sm:p-10 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-              <span className="inline-flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">
-                <FiClock size={13} /> Limited Time Offer
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold mt-3">
-                Get 50% OFF
+        <section className=" py-4 md:py-8 bg-linear-to-b from-(--color-primary) to-(--color-primary-content)">
+          <div className=" max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className=" mb-8">
+              <h2 className=" text-2xl md:text-3xl font-bold text-(--color-primary-content) mb-2">
+                Featured Restaurants
               </h2>
-              <p className="mt-2 text-white/80 text-sm sm:text-base">
-                On your first order. Don't miss out!
+              <p className=" text-(--color-primary-content)/70">
+                3 restaurant available
               </p>
             </div>
-
-            <Link
-              to="/"
-              className="bg-white text-red-500 font-bold px-8 py-3 rounded-xl hover:scale-105 duration-300 whitespace-nowrap text-sm sm:text-base"
-            >
-              Order Now →
-            </Link>
-          </div>
-        </section>
-
-        {/* ── Popular Dishes ── */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-8 pb-16 sm:pb-20">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">
-            Popular <span className="text-orange-500">Dishes</span>
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {foods.map((food) => (
-              <div
-                key={food.name}
-                className="bg-white rounded-3xl shadow-lg overflow-hidden hover:-translate-y-2 duration-300 group"
-              >
-                <div className="overflow-hidden">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className=" flex flex-col bg-(--color-base-100) rounded-xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer transform hover:scale-105">
+                <div className=" relative h-48 overflow-hidden bg-(--color-base-200)">
                   <img
-                    src={food.img}
-                    alt={food.name}
-                    className="h-48 sm:h-56 w-full object-cover group-hover:scale-105 duration-300"
+                    src={cardImg_1}
+                    alt="Under The Mango Tree"
+                    className=" w-full h-full object-cover"
                   />
+                  <div className=" absolute top-3 right-3 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded-full flex  items-center gap-1 font-semibold text-sm">
+                    <IoIosStar />
+                    3.6
+                  </div>
                 </div>
-
-                <div className="p-4 sm:p-5">
-                  <h3 className="font-bold text-lg sm:text-xl">{food.name}</h3>
-                  <p className="text-gray-400 text-xs mt-1">
-                    Fresh & delicious
+                <div className=" flex flex-col p-4">
+                  <h3 className=" font-bold text-(--color-content) text-lg mb-1">
+                    Under The Mango Tree
+                  </h3>
+                  <p className=" text-(--color-base-content) text-sm mb-3">
+                    Enjoy the thrill of grill and barbecue at Under The Mango
+                    Tree restaurant at Jehan Numa Palace, Bhopal. Head here now!
                   </p>
-
-                  <div className="flex justify-between items-center mt-4">
-                    <span className="font-extrabold text-orange-500 text-lg">
-                      {food.price}
+                  <div className=" flex flex-wrap gap-2 mb-3">
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      indian
                     </span>
-
-                    <button className="btn-shimmer inline-flex items-center gap-1.5 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:scale-105 duration-300">
-                      <FiPlusCircle size={15} /> Add
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      chineese
+                    </span>
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      ittalian
+                    </span>
+                  </div>
+                  <div className=" mt-auto pt-3 border-t border-(--color-base-200)">
+                    <button className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">
+                      <Link to={"restaurant-menu"}>Explore Menu</Link>
                     </button>
                   </div>
                 </div>
               </div>
-            ))}
+              <div className=" flex flex-col bg-(--color-base-100) rounded-xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer transform hover:scale-105">
+                <div className=" relative h-48 overflow-hidden bg-(--color-base-200)">
+                  <img
+                    src={cardImg_2}
+                    alt="Raj Darbar"
+                    className=" w-full h-full object-cover"
+                  />
+                  <div className=" absolute top-3 right-3 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded-full flex  items-center gap-1 font-semibold text-sm">
+                    <IoIosStar />
+                    4.8
+                  </div>
+                </div>
+                <div className=" flex flex-col p-4">
+                  <h3 className=" font-bold text-(--color-content) text-lg mb-1">
+                    Raj Darbar
+                  </h3>
+                  <p className=" text-(--color-base-content) text-sm mb-3">
+                    Raj Darbar is a one-of-a-kind Indian restaurant that offers
+                    a unique dining experience for families and friends with a
+                    dhaba-style theme.
+                  </p>
+                  <div className=" flex flex-wrap gap-2 mb-3">
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      indian
+                    </span>
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      chineese
+                    </span>
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      ittalian
+                    </span>
+                  </div>
+                  <div className=" mt-auto pt-3 border-t border-(--color-base-200)">
+                    <button className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">
+                      <Link to={"restaurant-menu"}>Explore Menu</Link>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className=" flex flex-col bg-(--color-base-100) rounded-xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer transform hover:scale-105">
+                <div className=" relative h-48 overflow-hidden bg-(--color-base-200)">
+                  <img
+                    src={cardImg_3}
+                    alt="Countryside Culture"
+                    className=" w-full h-full object-cover"
+                  />
+                  <div className=" absolute top-3 right-3 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded-full flex  items-center gap-1 font-semibold text-sm">
+                    <IoIosStar />
+                    4.1
+                  </div>
+                </div>
+                <div className=" flex flex-col p-4">
+                  <h3 className=" font-bold text-(--color-content) text-lg mb-1">
+                    Countryside Culture
+                  </h3>
+                  <p className=" text-(--color-base-content) text-sm mb-3">
+                    A hidden gem away from the city, offering lush green meadows
+                    and peaceful walking paths for relaxation
+                  </p>
+                  <div className=" flex flex-wrap gap-2 mb-3">
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      indian
+                    </span>
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      chineese
+                    </span>
+                  </div>
+                  <div className=" mt-auto pt-3 border-t border-(--color-base-200)">
+                    <button className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">
+                      <Link to={"restaurant-menu"}>Explore Menu</Link>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className=" flex flex-col bg-(--color-base-100) rounded-xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer transform hover:scale-105">
+                <div className=" relative h-48 overflow-hidden bg-(--color-base-200)">
+                  <img
+                    src={cardImg_4}
+                    alt="Sharma & Vishnu Fast Food"
+                    className=" w-full h-full object-cover"
+                  />
+                  <div className=" absolute top-3 right-3 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded-full flex  items-center gap-1 font-semibold text-sm">
+                    <IoIosStar />
+                    3.9
+                  </div>
+                </div>
+                <div className=" flex flex-col p-4">
+                  <h3 className=" font-bold text-(--color-content) text-lg mb-1">
+                    Sharma & Vishnu Fast Food
+                  </h3>
+                  <p className=" text-(--color-base-content) text-sm mb-3">
+                    It is highly famous among locals for its massive South
+                    Indian dosas, sizzling Chinese starters, and signature thick
+                    cold coffee.
+                  </p>
+                  <div className=" flex flex-wrap gap-2 mb-3">
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      indian
+                    </span>
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      chineese
+                    </span>
+                    <span className=" text-xs bg-(--color-base-300) text-(--color-base-content) px-2 py-1 rounded capitalize">
+                      south indian
+                    </span>
+                  </div>
+                  <div className=" mt-auto pt-3 border-t border-(--color-base-200)">
+                    <button className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">
+                      <Link to={"restaurant-menu"}>Explore Menu</Link>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className=" bg-(--color-base-100) py-12 md:py-16">
+          <div className=" max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className=" text-center mb-12">
+              <h2 className=" text-3xl md:text-4xl font-bold text-(--color-content) mb-4">
+                Cravings by the Numbers
+              </h2>
+              <p className=" text-lg text-(--color-base-content)">
+                See why millions trust us for their daily food delivery needs
+              </p>
+            </div>
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className=" bg-white rounded-lg p-8  shadow-md hover:shadow-lg transition text-center">
+                <div className=" mb-4">
+                  <div className=" text-4xl md:text-5xl font-bold text-(--color-primary) mb-2">
+                    2.5M+
+                  </div>
+                </div>
+                <h3 className=" text-lg font-semibold text-(--color-content) mb-2">
+                  Successful Deliveries
+                </h3>
+                <p className=" text-(--color-base-content)">
+                  Orders delivered with care and precision
+                </p>
+              </div>
+              <div className=" bg-white rounded-lg p-8  shadow-md hover:shadow-lg transition text-center">
+                <div className=" mb-4">
+                  <div className=" text-4xl md:text-5xl font-bold text-(--color-accent) mb-2">
+                    500K+
+                  </div>
+                </div>
+                <h3 className=" text-lg font-semibold text-(--color-content) mb-2">
+                  Happy Customers
+                </h3>
+                <p className=" text-(--color-base-content)">
+                  Satisfied users enjoying delicious food
+                </p>
+              </div>
+              <div className=" bg-white rounded-lg p-8  shadow-md hover:shadow-lg transition text-center">
+                <div className=" mb-4">
+                  <div className=" text-4xl md:text-5xl font-bold text-(--color-primary) mb-2">
+                    5K+
+                  </div>
+                </div>
+                <h3 className=" text-lg font-semibold text-(--color-content) mb-2">
+                  Partner Restaurants
+                </h3>
+                <p className=" text-(--color-base-content)">
+                  Restaurants serving amazing cuisine
+                </p>
+              </div>
+              <div className=" bg-white rounded-lg p-8  shadow-md hover:shadow-lg transition text-center">
+                <div className=" mb-4">
+                  <div className=" text-4xl md:text-5xl font-bold text-(--color-accent) mb-2">
+                    1K+
+                  </div>
+                </div>
+                <h3 className=" text-lg font-semibold text-(--color-content) mb-2">
+                  Active Delivery Partners
+                </h3>
+                <p className=" text-(--color-base-content)">
+                  Riders ensuring quick and safe delivery
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className=" bg-white py-12 md:py-16">
+          <div className=" max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className=" text-center mb-12">
+              <h2 className=" text-3xl md:text-4xl font-bold text-(--color-content) mb-4">
+                What Our Customers Say
+              </h2>
+              <p className=" text-lg text-(--color-base-content)">
+                Real feedback from real food lovers
+              </p>
+            </div>
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className=" bg-(--color-base-100) rounded-lg p-8 shadow-md hover:shadow-lg transition">
+                <div className="flex items-center gap-2 mb-4 text-xl">
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                </div>
+                <h3 className=" text-lg font-semibold text-(--color-content) mb-2">
+                  Amazing Service!
+                </h3>
+                <p className=" text-(--color-base-content) mb-4">
+                  "The food arrived hot and fresh. The delivery was incredibly
+                  fast. Highly impressed with Cravings' service!"
+                </p>
+                <div className=" flex items-center gap-3">
+                  <div className=" w-12 h-12 rounded-full bg-(--color-primary) flex items-center justify-center text-white font-bold">
+                    AJ
+                  </div>
+                  <div>
+                    <p className=" font-semibold text-(--color-content)">
+                      Arun J.
+                    </p>
+                    <p className=" text-sm text-(--color base-content">
+                      Verified Buyer
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className=" bg-(--color-base-100) rounded-lg p-8 shadow-md hover:shadow-lg transition">
+                <div className="flex items-center gap-2 mb-4 text-xl">
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                </div>
+                <h3 className=" text-lg font-semibold text-(--color-content) mb-2">
+                  Best App Ever!
+                </h3>
+                <p className=" text-(--color-base-content) mb-4">
+                  "Easy to use interface, wide variety of restaurants, and quick
+                  delivery. I order from Cravings every week!"
+                </p>
+                <div className=" flex items-center gap-3">
+                  <div className=" w-12 h-12 rounded-full bg-(--color-accent) flex items-center justify-center text-white font-bold">
+                    SP
+                  </div>
+                  <div>
+                    <p className=" font-semibold text-(--color-content)">
+                      Sneha P.
+                    </p>
+                    <p className=" text-sm text-(--color base-content">
+                      Verified Buyer
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className=" bg-(--color-base-100) rounded-lg p-8 shadow-md hover:shadow-lg transition">
+                <div className="flex items-center gap-2 mb-4 text-xl">
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                  <IoIosStar className="text-yellow-400" />
+                </div>
+                <h3 className=" text-lg font-semibold text-(--color-content) mb-2">
+                  Excellent Choices
+                </h3>
+                <p className=" text-(--color-base-content) mb-4">
+                  "Love the variety of restaurants available. Found my new
+                  favorite spot through Cravings. Definitely worth it!"
+                </p>
+                <div className=" flex items-center gap-3">
+                  <div className=" w-12 h-12 rounded-full bg-(--color-primary) flex items-center justify-center text-white font-bold">
+                    RK
+                  </div>
+                  <div>
+                    <p className=" font-semibold text-(--color-content)">
+                      Raj Kumar
+                    </p>
+                    <p className=" text-sm text-(--color base-content">
+                      Verified Buyer
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className=" bg-(--color-primary) text-(--color-primary-content) py-12 md:py-16">
+          <div className=" max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className=" text-3xl md:text-4xl font-bold mb-4">
+              Become a Restaurant Partner
+            </h2>
+            <p className=" text-lg opacity-90 mb-8">
+              Grow your business with Cravings. Join thousands of restaurants
+              already delivering with us.
+            </p>
+            <button className=" bg-(--color-base-100) text-(--color-primary) px-8 py-3 rounded-lg font-semibold hover:bg-(--color-base-200) transition">
+              <Link to={"/register"}>Partner With Us</Link>
+            </button>
           </div>
         </section>
       </div>
