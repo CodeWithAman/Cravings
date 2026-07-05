@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import cravingLogo from "../assets/circleLogo.png";
 
 const Footer = () => {
+  const loaction = useLocation().pathname;
+  const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+
   return (
     <>
       <footer className="bg-(--color-neutral) text-(--color-neutral-content) py-8">
@@ -22,36 +26,57 @@ const Footer = () => {
             <div>
               <h4 className=" text-lg font-semibold mb-4">Quick Links</h4>
               <ul className=" space-y-2">
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={"/"}>Home</Link>
+                <li
+                  onClick={() => navigate("/")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Home
                 </li>
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={"/about"}>About</Link>
+                <li
+                  onClick={() => navigate("/about")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  About
                 </li>
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={"/order-now"}>Order Now</Link>
+                <li
+                  onClick={() => navigate("/order-now")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Order Now
                 </li>
               </ul>
             </div>
             <div>
               <h4 className=" text-lg font-semibold mb-4">For Restaurants</h4>
               <ul className=" space-y-2">
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={'/register/restaurant'}>Partner With Us</Link>
+                <li
+                  onClick={() => navigate("/register/restaurant")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Partner With Us
                 </li>
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={'/restaurant-dashboard'}>Restaurant Dashboard</Link>
+                <li
+                  onClick={() => navigate("/restaurant-dashboard")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Restaurant Dashboard
                 </li>
               </ul>
             </div>
             <div>
               <h4 className=" text-lg font-semibold mb-4">For Riders</h4>
               <ul className=" space-y-2">
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={'/register/rider'}>Become a Rider</Link>
+                <li
+                  onClick={() => navigate("/register/rider")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Become a Rider
                 </li>
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={'/rider-dashboard'}>Rider Dashboard</Link>
+                <li
+                  onClick={() => navigate("/rider-dashboard")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Rider Dashboard
                 </li>
               </ul>
             </div>
@@ -60,14 +85,23 @@ const Footer = () => {
                 Feedback & Support
               </h4>
               <ul className=" space-y-2">
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={'/feedback'}>Submit Feedback</Link>
+                <li
+                  onClick={() => navigate("/feedback")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Submit Feedback
                 </li>
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={'/help-center'}>Help Center</Link>
+                <li
+                  onClick={() => navigate("/help-center")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Help Center
                 </li>
-                <li className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer">
-                  <Link to={'/contact-Us'}>Contact Us</Link>
+                <li
+                  onClick={() => navigate("/contact")}
+                  className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                >
+                  Contact Us
                 </li>
               </ul>
             </div>
@@ -75,20 +109,20 @@ const Footer = () => {
           <div className=" border-t border-(--color-neutral-content) my-8" />
           <div className=" flex flex-col md:flex-row justify-between items-center">
             <p className=" text-sm  text-(--color-neutral-content) mb-4 md:mb-0">
-              © 2026 Cravings. All rights reserved.
+              &copy; {currentYear} Cravings. All rights reserved.
             </p>
             <div className=" flex gap-6">
-              <Link to={'/privacy-policy'}>
+              <Link to={"/privacy-policy"}>
                 <span className=" text-sm text-(--color-neutral-content) hover:text-(--color-primary) transition-colors duration-200">
                   Privacy Policy
                 </span>
               </Link>
-              <Link to={'/terms-of-service'}>
+              <Link to={"/terms-of-service"}>
                 <span className=" text-sm text-(--color-neutral-content) hover:text-(--color-primary) transition-colors duration-200">
                   Terms of Service
                 </span>
               </Link>
-              <Link to={'/site-map'}>
+              <Link to={"/site-map"}>
                 <span className=" text-sm text-(--color-neutral-content) hover:text-(--color-primary) transition-colors duration-200">
                   Site Map
                 </span>
