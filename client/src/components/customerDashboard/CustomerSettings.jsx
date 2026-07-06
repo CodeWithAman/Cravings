@@ -69,7 +69,7 @@ const CustomerSettings = () => {
       });
 
       setUser(updatedUser);
-      sessionStorage.setItem("cravingsUser", JSON.stringify(updatedUser));
+      sessionStorage.setItem("cravingUser", JSON.stringify(updatedUser));
 
       setIsEditable(false);
       toast.success("Profile updated sucessfully!");
