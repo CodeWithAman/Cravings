@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000; // verify the port
 
-app.listen(port, () => {
+app.listen(port,async () => {
   console.log("Server Strated on PORT:", port); //
   connectDB();
   try {
