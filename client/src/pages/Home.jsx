@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { IoIosStar } from "react-icons/io";
 import herobgImg from "../assets/hero-bg.jpg";
@@ -7,28 +7,16 @@ import cardImg_1 from "../assets/restaurant-Image-1.avif";
 import cardImg_2 from "../assets/restaurant-Image-2.webp";
 import cardImg_3 from "../assets/restaurant-Image-3.webp";
 import cardImg_4 from "../assets/restaurant-Image-4.jpg";
+import CarouselComponent from "../components/CarouselComponent";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className=" min-h-screen">
         <section className=" relative text-(--color-primary-content) py-16 md:py-40 overflow-hidden">
           <div className=" absolute inset-0 z-0">
-            <div className=" relative w-full h-full overflow-hidden">
-              <div className=" absolute inset-0 transition-opacity">
-                <img
-                  src={herobgImg}
-                  alt="slide 1"
-                  className=" w-full h-full object-cover"
-                />
-              </div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <buttoon></buttoon>
-              <buttoon></buttoon>
-              <div></div>
-            </div>
+            <CarouselComponent />
           </div>
           <div className=" absolute inset-0 bg-black/40 z-10" />
           <div className=" relative z-20  max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,11 +31,17 @@ const Home = () => {
                 doorstep
               </p>
               <div className=" flex gap-4 justify-center">
-                <button className=" bg-(--color-primary) text-(--color-primary-content) px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition">
-                  <Link to={"/register"}>Sign Up</Link>
+                <button
+                  onClick={() => navigate("/register")}
+                  className=" bg-(--color-primary) text-(--color-primary-content) px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                >
+                  Sign Up
                 </button>
-                <button className=" bg-(--color-base-100) text-(--color-base-content) px-8 py-3 rounded-lg font-semibold hover:bg-(--color-base-200) transition">
-                  <Link to={"/order-now"}>Order Now</Link>
+                <button
+                  onClick={() => navigate("/order-now")}
+                  className=" bg-(--color-base-100) text-(--color-base-content) px-8 py-3 rounded-lg font-semibold hover:bg-(--color-base-200) transition"
+                >
+                  Order Now
                 </button>
               </div>
             </div>
@@ -105,8 +99,11 @@ const Home = () => {
                     </span>
                   </div>
                   <div className=" mt-auto pt-3 border-t border-(--color-base-200)">
-                    <button className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">
-                      <Link to={"restaurant-menu"}>Explore Menu</Link>
+                    <button
+                      onClick={() => navigate("restaurant-menu")}
+                      className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
+                    >
+                      Explore Menu
                     </button>
                   </div>
                 </div>
@@ -144,8 +141,11 @@ const Home = () => {
                     </span>
                   </div>
                   <div className=" mt-auto pt-3 border-t border-(--color-base-200)">
-                    <button className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">
-                      <Link to={"restaurant-menu"}>Explore Menu</Link>
+                    <button
+                      onClick={() => navigate("restaurant-menu")}
+                      className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
+                    >
+                      Explore Menu
                     </button>
                   </div>
                 </div>
@@ -179,8 +179,11 @@ const Home = () => {
                     </span>
                   </div>
                   <div className=" mt-auto pt-3 border-t border-(--color-base-200)">
-                    <button className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">
-                      <Link to={"restaurant-menu"}>Explore Menu</Link>
+                    <button
+                      onClick={() => navigate("restaurant-menu")}
+                      className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
+                    >
+                      Explore Menu
                     </button>
                   </div>
                 </div>
@@ -218,8 +221,11 @@ const Home = () => {
                     </span>
                   </div>
                   <div className=" mt-auto pt-3 border-t border-(--color-base-200)">
-                    <button className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">
-                      <Link to={"restaurant-menu"}>Explore Menu</Link>
+                    <button
+                      onClick={() => navigate("restaurant-menu")}
+                      className=" w-full bg-(--color-primary) text-(--color-primary-content) px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
+                    >
+                      Explore Menu
                     </button>
                   </div>
                 </div>
@@ -406,8 +412,11 @@ const Home = () => {
               Grow your business with Cravings. Join thousands of restaurants
               already delivering with us.
             </p>
-            <button className=" bg-(--color-base-100) text-(--color-primary) px-8 py-3 rounded-lg font-semibold hover:bg-(--color-base-200) transition">
-              <Link to={"/register"}>Partner With Us</Link>
+            <button
+              onClick={() => navigate("/register")}
+              className=" bg-(--color-base-100) text-(--color-primary) px-8 py-3 rounded-lg font-semibold hover:bg-(--color-base-200) transition"
+            >
+              Partner With Us
             </button>
           </div>
         </section>

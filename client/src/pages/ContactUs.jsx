@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import contactBg from "../assets/contactPage.jpg";
-import api from "../config/ApiConfig";
+import api from "../config/api.config.js";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({

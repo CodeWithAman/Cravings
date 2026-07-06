@@ -98,7 +98,7 @@ const Footer = () => {
                   Help Center
                 </li>
                 <li
-                  onClick={() => navigate("/contact")}
+                  onClick={() => navigate("/contact-Us")}
                   className=" text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
                 >
                   Contact Us
