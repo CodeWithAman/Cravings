@@ -23,7 +23,7 @@ const ContactUs = () => {
 
   const validateForm = (data) => {
     const newErrors = {};
-    if (!data.fulname.trim()) newErrors.fullname = "Full name is required";
+    if (!data.fullname.trim()) newErrors.fullname = "Full name is required";
     if (!data.email.trim()) newErrors.email = "Email is required";
     if (!data.subject.trim()) newErrors.subject = "Subject is required";
     if (!data.message.trim()) newErrors.message = "Message is required";
@@ -45,7 +45,7 @@ const ContactUs = () => {
       });
       toast.success(res.data.message);
       setFormData({
-        fullName: "",
+        fullname: "",
         email: "",
         phone: "",
         subject: "",
@@ -55,7 +55,7 @@ const ContactUs = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred. Please try again.",
+        "Unknown error occurred. Please try again.",
       );
     } finally {
       setLoading(false);
@@ -63,10 +63,9 @@ const ContactUs = () => {
   };
 
   const inputClass = (field) =>
-    `w-full px-3 py-2 border rounded-md text-sm text-(--color-neutral) placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-(--color-primary) ${
-      errors[field]
-        ? "border-(--color-error) border-2"
-        : "border-(--color-base-300)"
+    `w-full px-3 py-2 border rounded-md text-sm text-(--color-neutral) placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-(--color-primary) ${errors[field]
+      ? "border-(--color-error) border-2"
+      : "border-(--color-base-300)"
     }`;
 
   return (
@@ -85,15 +84,15 @@ const ContactUs = () => {
             <div className="mb-4">
               <input
                 type="text"
-                name="fullName"
-                value={formData.fullName}
+                name="fullname"
+                value={formData.fullname}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className={inputClass("fullName")}
+                className={inputClass("fullname")}
               />
-              {errors.fullName && (
+              {errors.fullname && (
                 <span className="text-(--color-error) text-xs mt-1 block">
-                  {errors.fullName}
+                  {errors.fullname}
                 </span>
               )}
             </div>
