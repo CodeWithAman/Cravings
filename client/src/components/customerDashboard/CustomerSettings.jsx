@@ -6,41 +6,16 @@ import { MdOutlineAddAPhoto, MdEdit } from "react-icons/md";
 
 const CustomerSettings = () => {
   const { user, setUser } = useAuth();
-
-  const [profileData, setProfileData] = useState({
-    fullname: user?.fullname || "",
-    email: user?.email || "",
-    phone: user?.phone || "",
-    photo: user?.photo.url || "https://via.placeholder.com/150",
-  });
-
   const [isEditable, setIsEditable] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
   const [profilePicPreview, setProfilePreview] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     fullname: user?.fullname || "",
     email: user?.email || "",
     phone: user?.phone || "",
   });
-
-  const [isSavingProfile, setIsSavingProfile] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      setProfileData({
-        fullname: user.fullname || "",
-        email: user.email || "",
-        phone: user.phone || "",
-        photo: user.photo || "https://via.placeholder.com/150",
-      });
-      setFormData({
-        fullname: user.fullname || "",
-        email: user.email || "",
-        phone: user.phone || "",
-      });
-    }
-  }, [user?.fullname, user?.email, user?.phone, user?.photo]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,7 +24,7 @@ const CustomerSettings = () => {
 
   const handleSaveProfile = async () => {
     try {
-      setIsSavingProfile(true);
+      setIsLoading(true);
 
       const payload = new FormData();
       payload.append("fullname", formData.fullname);
@@ -61,13 +36,6 @@ const CustomerSettings = () => {
       const response = await api.put(`/user/edit-profile`, payload);
 
       const updatedUser = response.data.data;
-      setProfileData({
-        fullName: updatedUser.fullName || "",
-        email: updatedUser.email || "",
-        phone: updatedUser.phone || "",
-        photo: updatedUser.photo || "https://via.placeholder.com/150",
-      });
-
       setUser(updatedUser);
       sessionStorage.setItem("cravingUser", JSON.stringify(updatedUser));
 
@@ -76,23 +44,24 @@ const CustomerSettings = () => {
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to update profile");
     } finally {
-      setIsSavingProfile(false);
+      setIsLoading(false);
     }
   };
 
   const handleCancel = () => {
     setFormData({
-      fullName: profileData.fullName,
-      email: profileData.email,
-      phone: profileData.phone,
+      fullname: user.fullname,
+      email: user.email,
+      phone: user.phone,
     });
+    setProfilePreview(null);
     setIsEditable(false);
   };
 
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     setProfilePreview(URL.createObjectURL(file));
-    setProfilePic(false);
+    setProfilePic(file);
   };
 
   return (
@@ -114,14 +83,14 @@ const CustomerSettings = () => {
                 <button
                   onClick={handleSaveProfile}
                   className="flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm"
-                  disabled={isSavingProfile}
+                  disabled={isLoading}
                 >
-                  {isSavingProfile ? "Saving..." : "Save Changes"}
+                  {isLoading ? "Saving..." : "Save Changes"}
                 </button>
                 <button
                   onClick={handleCancel}
                   className="flex items-center gap-2 bg-(--color-secondary) text-(--color-secondary-content) px-3 py-1 rounded text-sm"
-                  disabled={isSavingProfile}
+                  disabled={isLoading}
                 >
                   Cancel
                 </button>
@@ -134,7 +103,7 @@ const CustomerSettings = () => {
               <div className="relative">
                 <div className="w-36 h-36">
                   <img
-                    src={profilePicPreview || profileData.photo}
+                    src={profilePicPreview || user.photo.url}
                     alt="Profile"
                     className="w-full h-full rounded-full object-cover border-2 border-(--color-primary)"
                   />
@@ -167,8 +136,8 @@ const CustomerSettings = () => {
                   </label>
                   <input
                     type="text"
-                    name="fullName"
-                    value={formData.fullName}
+                    name="fullname"
+                    value={formData.fullname}
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${isEditable ? "border-(--color-secondary)" : "border-transparent"} rounded col-span-4`}
                     disabled={!isEditable}
@@ -182,8 +151,8 @@ const CustomerSettings = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-3 py-2 border ${isEditable ? "border-(--color-secondary)" : "border-transparent"} rounded col-span-4`}
-                    disabled={!isEditable}
+                    className={`w-full px-3 py-2 border ${isEditable ? "border-(--color-secondary) text-(--color-secondary) disabled:bg-(--color-secondary)/50 cursor-not-allowed" : "border-transparent"} rounded col-span-4`}
+                    disabled
                   />
 
                   <label className="block text-sm font-semibold mb-2">

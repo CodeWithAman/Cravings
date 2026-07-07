@@ -27,7 +27,7 @@ const Navbar = () => {
       const res = await api.get("/auth/logout");
       toast.success(res.data.message);
 
-      sessionStorage.removeItem("UserData");
+      sessionStorage.removeItem("cravingUser");
       setUser(false);
       setIsLogin(false);
       setRole?.(null);
@@ -35,7 +35,7 @@ const Navbar = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Something went wrong while logging out.",
+        "Something went wrong while logging out.",
       );
     }
   };
@@ -57,12 +57,12 @@ const Navbar = () => {
               onClick={handleNavigate}
             >
               <img
-                src={user?.photo}
-                alt={user?.fullName}
+                src={user?.photo.url}
+                alt={user?.fullname}
                 className="w-12 h-12 rounded-full object-cover object-top"
               />
               <div className="flex flex-col items-start">
-                <span className="text-base">{user?.fullName}</span>
+                <span className="text-base">{user?.fullname}</span>
                 <span className="text-xs text-(--color-primary-content)/80">
                   Customer
                 </span>
