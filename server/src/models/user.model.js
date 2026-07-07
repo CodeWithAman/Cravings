@@ -28,11 +28,11 @@ const UserSchema = mongoose.Schema(
       required: true,
     },
     photo: {
-      url:{
+      url: {
         type: String,
         required: true,
       },
-      publicId:{
+      publicId: {
         type: String,
       }
     },

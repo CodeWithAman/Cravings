@@ -75,7 +75,7 @@ export const LoginUser = async (req, res, next) => {
     await genToken(existingUser, res);
 
     res.status(200).json({
-      message: "User Login Sucessfully | Welcome Back !!",
+      message: "Welcome Back !!",
       data: existingUser,
     });
   } catch (error) {
