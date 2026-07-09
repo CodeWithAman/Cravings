@@ -12,11 +12,11 @@ const Navbar = () => {
 
   const handleNavigate = () => {
     if (role === "restaurant") {
-      navigate("/restaurant-dashboard");
+      navigate("/restaurant/dashboard");
     } else if (role === "rider") {
-      navigate("/rider-dashboard");
+      navigate("/rider/dashboard");
     } else if (role === "admin") {
-      navigate("/admin-dashboard");
+      navigate("/admin/dashboard");
     } else {
       navigate("/customer/dashboard");
     }
@@ -63,8 +63,8 @@ const Navbar = () => {
               />
               <div className="flex flex-col items-start">
                 <span className="text-base">{user?.fullname}</span>
-                <span className="text-xs text-(--color-primary-content)/80">
-                  Customer
+                <span className="text-xs text-(--color-primary-content)/80 uppercase font-semibold">
+                  {role}
                 </span>
               </div>
             </button>

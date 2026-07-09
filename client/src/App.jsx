@@ -8,6 +8,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ContactUs from "./pages/ContactUs";
 import CustomerDashborad from "./pages/dashboard/CustomerDashborad";
+import AdminDashboard from "./pages/dashboard/AdminDashboard";
+import RestaurantDashboard from "./pages/dashboard/RestaurantDashboard";
+import RiderDashboard from "./pages/dashboard/RiderDashboard";
 
 const App = () => {
   return (
@@ -24,6 +27,9 @@ const App = () => {
 
           {/* dashborad routes */}
           <Route path="/customer/dashboard" element={<CustomerDashborad/>} />
+          <Route path="/admin/dashboard" element={<AdminDashboard/>} />
+          <Route path="/restaurant/dashboard" element={<RestaurantDashboard/>} />
+          <Route path="/rider/dashboard" element={<RiderDashboard/>} />
         </Routes>
         <Footer />
       </BrowserRouter>
