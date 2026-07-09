@@ -4,15 +4,17 @@ import { genToken } from "../utils/auth.service.js";
 
 export const RegisterUser = async (req, res, next) => {
   try {
+    
     // controller logic
-    const { fullname, email, phone, gender, password, dob } = req.body;
-
-    if (!fullname || !email || !password || !phone || !gender || !dob) {
+    const { fullname, email, phone, gender, password, dob, userType } = req.body;
+    
+    if (!fullname || !email || !password || !phone || !gender || !dob || !userType) {
       const error = new Error("All Feilds Required");
       error.statusCode = 400;
       return next(error);
     }
 
+    
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       const error = new Error("Email Already Registered");
@@ -38,6 +40,7 @@ export const RegisterUser = async (req, res, next) => {
       password: hashedPassword,
       dob,
       photo,
+      userType,
     });
 
     res.status(201).json({ message: "User Created Succesfully" });
@@ -57,21 +60,21 @@ export const LoginUser = async (req, res, next) => {
       error.statusCode = 400;
       return next(error);
     }
-
+    
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
       const error = new Error("Email not Registered");
       error.statusCode = 404;
       return next(error);
     }
-
+    
     const isverified = await bcrypt.compare(password, existingUser.password);
     if (!isverified) {
       const error = new Error("Incorrect Password");
       error.statusCode = 401;
       return next(error);
     }
-
+    
     await genToken(existingUser, res);
 
     res.status(200).json({
