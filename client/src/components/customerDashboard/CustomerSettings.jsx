@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import api from "../../config/api.config.js";
 import toast from "react-hot-toast";
-import { MdOutlineAddAPhoto, MdEdit } from "react-icons/md";
+import { MdOutlineAddAPhoto, MdEdit, MdOutlineLockReset } from "react-icons/md";
+import PasswordChangeModal from "../commonModals/PasswordChangeModal.jsx";
 
 const CustomerSettings = () => {
   const { user, setUser } = useAuth();
@@ -10,6 +11,8 @@ const CustomerSettings = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [profilePicPreview, setProfilePreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPasswordChangeModelOpen, setIsPasswordChangeModelOpen] =
+    useState(false);
 
   const [formData, setFormData] = useState({
     fullname: user?.fullname || "",
@@ -72,12 +75,20 @@ const CustomerSettings = () => {
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold">Profile Information</h3>
             {!isEditable ? (
-              <button
-                onClick={() => setIsEditable(true)}
-                className="flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm"
-              >
-                <MdEdit /> Edit
-              </button>
+              <div className=" flex gap-3">
+                <button
+                  onClick={() => setIsEditable(true)}
+                  className=" flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm hover:bg-(--color-primary) hover:text-(--color-primary-content)"
+                >
+                  <MdEdit /> Edit
+                </button>
+                <button
+                  onClick={() => setIsPasswordChangeModelOpen(true)}
+                  className=" flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm hover:bg-(--color-primary) hover:text-(--color-primary-content)"
+                >
+                  <MdOutlineLockReset /> Change Password
+                </button>
+              </div>
             ) : (
               <div className="flex gap-2 justify-end">
                 <button
@@ -172,6 +183,13 @@ const CustomerSettings = () => {
           </div>
         </div>
       </div>
+
+      {isPasswordChangeModelOpen && (
+        <PasswordChangeModal
+          open={isPasswordChangeModelOpen}
+          onClose={() => setIsPasswordChangeModelOpen(false)}
+        />
+      )}
     </>
   );
 };
