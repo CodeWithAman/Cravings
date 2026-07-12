@@ -130,14 +130,14 @@ export const SendOTP = async (req, res, next) => {
 
     const hashedOTP = await bcrypt.hash(newOTP, 10);
 
-    const existingOTP = await Option.findOne({ email });
+    const existingOTP = await OTP.findOne({ email });
     if (existingOTP) {
       await existingOTP.deleteOne();
     }
 
     const saveOTP = await OTP.create({
       email,
-      OTP: hashedOTP,
+      otp: hashedOTP,
     });
 
     await sendOTPEmail(email, newOTP);
@@ -196,7 +196,7 @@ export const ResetPassword = async (req, res, next) => {
   try {
     const { newPassword } = req.body;
 
-    const currentUser = req.User;
+    const currentUser = req.user;
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
