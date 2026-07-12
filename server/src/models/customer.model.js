@@ -35,12 +35,21 @@ const CustomerSchema = mongoose.Schema(
         },
       ],
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    status: {
+      type: String,
+      enum: ["pending", "verified", "suspended"],
+      default: "pending",
+    },
   },
   {
     timestamps: true,
   },
 );
 
-const Customer = mongoose.model("customer" , CustomerSchema);
+const Customer = mongoose.model("customer", CustomerSchema);
 
 export default Customer;
