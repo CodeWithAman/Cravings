@@ -36,7 +36,7 @@ const RiderSettings = () => {
 
       payload.append("displayPic", profilePic);
 
-      const response = await api.put(`/user/edit-profile`, payload);
+      const response = await api.put(`/common/edit-profile`, payload);
 
       const updatedUser = response.data.data;
       setUser(updatedUser);
