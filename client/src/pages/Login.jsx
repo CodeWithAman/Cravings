@@ -70,7 +70,7 @@ const Login = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred during registration. Please try again.",
+          "Unknown error occurred during Login. Please try again.",
       );
     } finally {
       setLoading(false);
