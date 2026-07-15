@@ -6,6 +6,39 @@ import {
   deleteSingleImage,
 } from "../utils/image.service.js";
 
+export const RestaurantGetData = async (req, res, next) => {
+  try {
+    const currentUser = req.user;
+    const managerId = req.query.id;
+
+    console.log("Current User: ", currentUser);
+    console.log("ManagerID: ", managerId);
+
+    if (currentUser.id.toString() !== managerId) {
+      const error = new Error("Unauthorized Access");
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    const restaurantData = await Restaurant.find({ managerId });
+
+    if (restaurantData) {
+      res
+        .status(200)
+        .json({
+          message: "Restaurant Fetched Successfully",
+          data: restaurantData,
+        });
+    } else {
+      res.status(200).json({ message: "No Restaurant Data Found..", data: {} });
+    }
+    
+  } catch (error) {
+    console.log(error.message);
+    next();
+  }
+};
+
 export const RestaurantUpdateProfile = async (req, res, next) => {
   try {
     const currentUser = req.user;
