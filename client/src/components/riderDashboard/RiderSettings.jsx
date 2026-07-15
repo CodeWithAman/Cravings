@@ -71,7 +71,7 @@ const RiderSettings = () => {
     <>
       <div className="overflow-y-auto h-full p-6 space-y-6">
         {/* User Profile Section */}
-        <div className="bg-(--color-base-200) rounded-lg p-6">
+        <div className="bg-(--color-base-200) rounded-lg p-3">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold">Profile Information</h3>
             {!isEditable ? (
@@ -112,7 +112,7 @@ const RiderSettings = () => {
           <div>
             <div className="flex items-center gap-6">
               <div className="relative">
-                <div className="w-36 h-36">
+                <div className="w-25 h-25">
                   <img
                     src={profilePicPreview || user.photo.url}
                     alt="Profile"
@@ -141,47 +141,55 @@ const RiderSettings = () => {
               </div>
 
               <div className="space-y-4 w-full">
-                <div className="grid grid-cols-5 gap-2 justify-center items-center">
-                  <label className="block text-sm font-semibold mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="fullname"
-                    value={formData.fullname}
-                    onChange={handleChange}
-                    className={`w-full px-3 py-2 border ${isEditable ? "border-(--color-secondary)" : "border-transparent"} rounded col-span-4`}
-                    disabled={!isEditable}
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="w-full">
+                    <label className="block text-sm font-semibold mb-2">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      name="fullname"
+                      value={formData.fullname}
+                      onChange={handleChange}
+                      className={`w-full px-1.5 py-1 border border-(--color-secondary) ${isEditable ? "bg-(--color-base-100)" : "bg-(--color-base-200)"} rounded`}
+                      disabled={!isEditable}
+                    />
+                  </div>
 
-                  <label className="block text-sm font-semibold mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`w-full px-3 py-2 border ${isEditable ? "border-(--color-secondary) text-(--color-secondary) disabled:bg-(--color-secondary)/50 cursor-not-allowed" : "border-transparent"} rounded col-span-4`}
-                    disabled
-                  />
+                  <div className="w-full">
+                    <label className="block text-sm font-semibold mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`w-full px-1.5 py-1 border border-(--color-secondary) disabled:bg-(--secondary) cursor-not-allowed  rounded`}
+                      disabled
+                    />
+                  </div>
 
-                  <label className="block text-sm font-semibold mb-2">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className={`w-full px-3 py-2 border ${isEditable ? "border-(--color-secondary)" : "border-transparent"} rounded col-span-4`}
-                    disabled={!isEditable}
-                  />
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={`w-full px-1.5 py-1 border border-(--color-secondary) ${isEditable ? "bg-(--color-base-100)" : "bg-(--color-base-200)"} rounded`}
+                      disabled={!isEditable}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Rider Info Section  */}
       </div>
 
       {isPasswordChangeModelOpen && (
