@@ -259,8 +259,8 @@ const CustomerSettings = () => {
   };
 
   const renderAddressForm = () => (
-    <div className="space-y-3">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="space-y-1">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="w-full">
           <label className="block text-sm font-semibold mb-2">Name</label>
           <input
@@ -291,31 +291,6 @@ const CustomerSettings = () => {
           </select>
         </div>
 
-        <div className="w-full flex items-end pb-1.5">
-          <label className="flex items-center gap-2 text-sm font-semibold">
-            <input
-              type="checkbox"
-              name="isDefault"
-              checked={addressFormData.isDefault}
-              onChange={handleAddressFormChange}
-              className="w-4 h-4 accent-(--color-primary)"
-            />
-            Set as default address
-          </label>
-        </div>
-
-        <div className="w-full md:col-span-3">
-          <label className="block text-sm font-semibold mb-2">Address</label>
-          <textarea
-            name="address"
-            rows={2}
-            value={addressFormData.address}
-            onChange={handleAddressFormChange}
-            required
-            className="w-full px-1.5 py-1 border border-(--color-secondary) bg-(--color-base-100) rounded resize-none"
-          />
-        </div>
-
         <div className="w-full">
           <label className="block text-sm font-semibold mb-2">City</label>
           <input
@@ -341,9 +316,7 @@ const CustomerSettings = () => {
         </div>
 
         <div className="w-full">
-          <label className="block text-sm font-semibold mb-2">
-            Pin Code
-          </label>
+          <label className="block text-sm font-semibold mb-2">Pin Code</label>
           <input
             type="text"
             name="pinCode"
@@ -397,6 +370,18 @@ const CustomerSettings = () => {
             className="w-full px-1.5 py-1 border border-(--color-secondary) bg-(--color-base-100) rounded"
           />
         </div>
+
+        <div className="w-full md:col-span-4">
+          <label className="block text-sm font-semibold mb-2">Address</label>
+          <textarea
+            name="address"
+            rows={2}
+            value={addressFormData.address}
+            onChange={handleAddressFormChange}
+            required
+            className="w-full px-1.5 py-1 border border-(--color-secondary) bg-(--color-base-100) rounded resize-none"
+          />
+        </div>
       </div>
 
       <div className="flex gap-2 justify-end">
@@ -425,7 +410,7 @@ const CustomerSettings = () => {
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-      <div className="h-[90vh] flex flex-col gap-4 p-2 overflow-hidden">
+      <div className="h-[88vh] flex flex-col gap-4 p-2 overflow-hidden">
         {/* Account Status - compact top strip */}
         <div className="shrink-0 bg-(--color-base-200) rounded-lg px-4 py-2.5 flex items-center justify-between flex-wrap gap-2">
           <h3 className="text-sm font-semibold">Account Status</h3>
@@ -569,14 +554,29 @@ const CustomerSettings = () => {
         {/* Address Book Section - fills remaining space, scrolls internally */}
         <div className="flex-1 min-h-0 flex flex-col bg-(--color-base-200) rounded-lg p-3">
           <div className="shrink-0 flex justify-between items-center mb-3">
-            <h3 className="text-lg font-semibold">Address Book</h3>
-            <button
-              onClick={startAddAddress}
-              className="flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm"
-              disabled={editingAddressIndex !== null}
-            >
-              <MdAdd /> Add Address
-            </button>
+            <div className="w-full flex items-center pb-1.5 gap-10">
+              <div className="text-lg font-semibold ">Address Book</div>
+              <label className="flex items-center gap-2 text-xs font-semibold">
+                <input
+                  type="checkbox"
+                  name="isDefault"
+                  checked={addressFormData.isDefault}
+                  onChange={handleAddressFormChange}
+                  className="w-4 h-4 accent-(--color-primary)"
+                />
+                Set as default address
+              </label>
+            </div>
+            <div className="flex items-center text-xm ">
+              {" "}
+              <button
+                onClick={startAddAddress}
+                className="flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-2 py-0.5 rounded text-xs"
+                disabled={editingAddressIndex !== null}
+              >
+                <MdAdd /> Add Address
+              </button>
+            </div>
           </div>
 
           {isLoadingCustomer ? (
