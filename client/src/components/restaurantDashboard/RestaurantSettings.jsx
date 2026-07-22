@@ -1,51 +1,146 @@
-import React, { useState } from "react";
-import RestaurantInformation from "./settings/RestaurantInformation";
-import ResturantCoreDetails from "./settings/RestaurantCoreDetails";
+import React, { useEffect, useState } from "react";
+import api from "../../config/api.config.js";
+import { toast } from "react-hot-toast";
+import { RiLoder4Fill } from "react-icons/ri";
+import { useAuth } from "../../context/AuthContext.jsx";
+import CoreDetails from "./settings/coreDetails/Index";
+import Information from "./settings/restaurantInformation/Index";
 import RestaurantPhotos from "./settings/RestaurantPhotos";
+import Loader from "../../components/Loader";
+import { IoMdHammer } from "react-icons/io";
 
 const RestaurantSetting = () => {
+  const { user } = useAuth();
   const Tabs = [
     { id: "information", label: "Information" },
     { id: "coreDetails", label: "Core Details" },
     { id: "photos", label: "Photos" },
   ];
-  const [activeTab, setActiveTab] = useState("coreDetails");
+  const [activeTab, setActiveTab] = useState("information");
 
-  const [isRestaurantOpen, setIsRestaurantOpen] = useState(true);
+  const [isLoadingResturantOpen, setIsLoadingResturantOpen] = useState(true);
+  const [isRestaurantOpen, setIsRestaurantOpen] = useState(
+    () => sessionStorage.getItem("RestaurantOpen") === "true",
+  );
+
+  // Loading the Restaurant Data
+  const [isLoadingRestaurant, setIsLoadingRestaurant] = useState(false);
+  const [loadingRestaurantError, setLoadingRestaurantError] = useState(null);
+  const [restaurantData, setRestaurantData] = useState();
+
+  const fetchRestaurantData = async () => {
+    try {
+      setIsLoadingRestaurant(true);
+      setIsLoadingResturantOpen(true);
+
+      const res = await api.get(
+        `/restaurant/get-resturant-data?id=${user._id}`,
+      );
+      setRestaurantData(res.data.data);
+      sessionStorage.setItem(
+        "cravingRestaurantData",
+        JSON.stringify(res.data.data),
+      );
+      sessionStorage.setItem("RestaurantOpen", res.data.data.isOpen);
+
+      setIsRestaurantOpen(res.data.data.isOpen);
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+          "Unknown error occurred fetching restaurant. Please try again.",
+      );
+
+      setLoadingRestaurantError(
+        error.response?.data?.message ||
+          "Unknown error occurred fetching restaurant. Please try again.",
+      );
+    } finally {
+      setIsLoadingRestaurant(false);
+      setIsLoadingResturantOpen(false);
+    }
+  };
+
+  const handleRestaurantOpen = async () => {
+    try {
+      setIsLoadingResturantOpen(true);
+
+      const res = await api.patch(
+        `/restaurant/change-open-status/${!isRestaurantOpen}?id=${user._id}`,
+      );
+
+      setIsRestaurantOpen(res.data.data.isOpen);
+      setRestaurantData(res.data.data);
+
+      sessionStorage.setItem(
+        "cravingRestaurantData",
+        JSON.stringify(res.data.data),
+      );
+
+      sessionStorage.setItem("RestaurantOpen", res.data.data.isOpen);
+
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+          "Unknown error occurred fetching restaurant. Please try again.",
+      );
+    } finally {
+      setIsLoadingResturantOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user?._id) {
+      fetchRestaurantData(false);
+    }
+  }, [user]);
+
   return (
     <>
       <div className=" h-full flex flex-col">
-        <div className="border-b border-(--color-secondary)/50 flex justify-between mb-2 w-full">
-          <div className="flex gap-3 ">
-            {Tabs.map((tab, idx) => (
-              <>
-                <div
-                  key={idx}
-                  className={`p-2 uppercase cursor-pointer ${activeTab === tab.id ? "text-(--color-primary) border-b-3 border-(--color-primary)" : ""}`}
-                  onClick={() => setActiveTab(tab.id)}
-                >
-                  {tab.label}
-                </div>
-              </>
-            ))}
-          </div>
+        {isLoadingRestaurant ? (
+          <Loader height="100%" width="100%" />
+        ) : (
+          <>
+            <div className="border-b border-(--color-secondary)/50 flex justify-between mb-2 w-full">
+              <div className="flex gap-3 ">
+                {Tabs.map((tab, idx) => (
+                  <>
+                    <div
+                      key={idx}
+                      className={`p-2 uppercase cursor-pointer ${activeTab === tab.id ? "text-(--color-primary) border-b-3 border-(--color-primary)" : ""}`}
+                      onClick={() => setActiveTab(tab.id)}
+                    >
+                      {tab.label}
+                    </div>
+                  </>
+                ))}
+              </div>
 
-          <div className="flex items-center gap-3">
-            <label className="w-22 text-xs font-semibold">Currently Open</label>
-            <input
-              type="checkbox"
-              name="isOpen"
-              checked={isRestaurantOpen}
-              onChange={() => setIsRestaurantOpen(!isRestaurantOpen)}
-              className=" w-4 h-4 accent-(--color-primary)"
-            />
-          </div>
-        </div>
-        <div className="h-full overflow-y-auto rounded-lg bg-(--color-base-200) p-2">
-          {activeTab === "information" && <RestaurantInformation />}
-          {activeTab === "coreDetails" && <ResturantCoreDetails />}
-          {activeTab === "photos" && <RestaurantPhotos />}
-        </div>
+              <div className="flex items-center gap-3">
+                <label className="w-22 text-xs font-semibold">
+                  Currently Open
+                </label>
+                {isLoadingResturantOpen || isLoadingRestaurant ? (
+                  <RiLoder4Fill className="animate-spin" />
+                ) : (
+                  <input
+                    type="checkbox"
+                    name="isOpen"
+                    checked={isRestaurantOpen}
+                    onChange={handleRestaurantOpen}
+                    className=" w-4 h-4 accent-(--color-primary)"
+                  />
+                )}
+              </div>
+            </div>
+            <div className="h-full rounded-lg bg-(--color-base-200) p-2">
+              {activeTab === "information" && <Information />}
+              {activeTab === "coreDetails" && <CoreDetails />}
+              {activeTab === "photos" && <RestaurantPhotos />}
+            </div>
+          </>
+        )}
       </div>
     </>
   );
