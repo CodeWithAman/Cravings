@@ -47,11 +47,11 @@ const RestaurantSetting = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-        "Unknown error occurred fetching restaurant. Please try again.",
+          "Unknown error occurred fetching restaurant. Please try again.",
       );
       setLoadingRestaurantError(
         error.response?.data?.message ||
-        "Unknown error occurred fetching restaurant. Please try again.",
+          "Unknown error occurred fetching restaurant. Please try again.",
       );
     } finally {
       setIsLoadingRestaurant(false);
@@ -78,7 +78,7 @@ const RestaurantSetting = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-        "Unknown error occurred while Opening the Restaurant. Please try again.",
+          "Unknown error occurred while Opening the Restaurant. Please try again.",
       );
     } finally {
       setIsLoadingResturantOpen(false);
@@ -87,7 +87,7 @@ const RestaurantSetting = () => {
 
   useEffect(() => {
     if (user?._id) {
-      fetchRestaurantData();
+      // fetchRestaurantData();
     }
   }, [user]);
 
