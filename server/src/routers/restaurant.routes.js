@@ -16,4 +16,22 @@ router.post(
 
 router.get("/get-restaurant-data", RestaurantAuthProtect, RestaurantGetData);
 
+router.put(
+  "/update-restaurant-info",
+  RestaurantAuthProtect,
+  RestaurantUpdateInfo,
+);
+
+router.patch(
+  "/change-open-status/:openStatus",
+  RestaurantAuthProtect,
+  OpenRestaurant,
+);
+
+router.put(
+  "/update-legal-info",
+  RestaurantAuthProtect,
+  RestaurantUpdateLegalInfo,
+); 
+
 export default router;
