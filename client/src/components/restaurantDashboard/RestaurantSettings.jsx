@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../config/api.config.js";
-import { toast } from "react-hot-toast";
-import { RiLoder4Fill } from "react-icons/ri";
-import { useAuth } from "../../context/AuthContext.jsx";
+import toast from "react-hot-toast";
+import { RiLoader4Fill } from "react-icons/ri";
+import { useAuth } from "../../context/AuthContext";
 import CoreDetails from "./settings/coreDetails/Index";
 import Information from "./settings/restaurantInformation/Index";
 import RestaurantPhotos from "./settings/RestaurantPhotos";
@@ -23,7 +23,7 @@ const RestaurantSetting = () => {
     () => sessionStorage.getItem("RestaurantOpen") === "true",
   );
 
-  // Loading the Restaurant Data
+  //Load Restaurant Data
   const [isLoadingRestaurant, setIsLoadingRestaurant] = useState(false);
   const [loadingRestaurantError, setLoadingRestaurantError] = useState(null);
   const [restaurantData, setRestaurantData] = useState();
@@ -38,7 +38,7 @@ const RestaurantSetting = () => {
       );
       setRestaurantData(res.data.data);
       sessionStorage.setItem(
-        "cravingRestaurantData",
+        "cravingRestaurant",
         JSON.stringify(res.data.data),
       );
       sessionStorage.setItem("RestaurantOpen", res.data.data.isOpen);
@@ -47,12 +47,11 @@ const RestaurantSetting = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred fetching restaurant. Please try again.",
+        "Unknown error occurred fetching restaurant. Please try again.",
       );
-
       setLoadingRestaurantError(
         error.response?.data?.message ||
-          "Unknown error occurred fetching restaurant. Please try again.",
+        "Unknown error occurred fetching restaurant. Please try again.",
       );
     } finally {
       setIsLoadingRestaurant(false);
@@ -67,22 +66,19 @@ const RestaurantSetting = () => {
       const res = await api.patch(
         `/restaurant/change-open-status/${!isRestaurantOpen}?id=${user._id}`,
       );
-
       setIsRestaurantOpen(res.data.data.isOpen);
       setRestaurantData(res.data.data);
-
       sessionStorage.setItem(
-        "cravingRestaurantData",
+        "cravingRestaurant",
         JSON.stringify(res.data.data),
       );
-
       sessionStorage.setItem("RestaurantOpen", res.data.data.isOpen);
 
       toast.success(res.data.message);
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred fetching restaurant. Please try again.",
+        "Unknown error occurred while Opening the Restaurant. Please try again.",
       );
     } finally {
       setIsLoadingResturantOpen(false);
@@ -91,7 +87,7 @@ const RestaurantSetting = () => {
 
   useEffect(() => {
     if (user?._id) {
-      fetchRestaurantData(false);
+      fetchRestaurantData();
     }
   }, [user]);
 
@@ -105,15 +101,13 @@ const RestaurantSetting = () => {
             <div className="border-b border-(--color-secondary)/50 flex justify-between mb-2 w-full">
               <div className="flex gap-3 ">
                 {Tabs.map((tab, idx) => (
-                  <>
-                    <div
-                      key={idx}
-                      className={`p-2 uppercase cursor-pointer ${activeTab === tab.id ? "text-(--color-primary) border-b-3 border-(--color-primary)" : ""}`}
-                      onClick={() => setActiveTab(tab.id)}
-                    >
-                      {tab.label}
-                    </div>
-                  </>
+                  <div
+                    key={idx}
+                    className={`p-2 uppercase cursor-pointer ${activeTab === tab.id ? "text-(--color-primary) border-b-3 border-(--color-primary)" : ""}`}
+                    onClick={() => setActiveTab(tab.id)}
+                  >
+                    {tab.label}
+                  </div>
                 ))}
               </div>
 
@@ -122,7 +116,7 @@ const RestaurantSetting = () => {
                   Currently Open
                 </label>
                 {isLoadingResturantOpen || isLoadingRestaurant ? (
-                  <RiLoder4Fill className="animate-spin" />
+                  <RiLoader4Fill className="animate-spin" />
                 ) : (
                   <input
                     type="checkbox"

@@ -1,7 +1,7 @@
 import React from "react";
 import { MdDashboard } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
-import { MdFavoriteBorder, MdMenuBook } from "react-icons/md";
+import { MdMenuBook } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 
 const RestaurantSidebar = ({ activeTab, setActiveTab }) => {
