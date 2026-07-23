@@ -23,11 +23,14 @@ const RestaurantSchema = mongoose.Schema(
         },
       },
     },
-
-    documents: {
+    legal: {
       type: {
         legalName: { type: String, required: true },
         companyType: { type: String, required: true },
+      },
+    },
+    documents: {
+      type: {
         gstCertificate: { type: String, required: true },
         fssaiCertificate: { type: String, required: true },
         panCard: { type: String, required: true },
