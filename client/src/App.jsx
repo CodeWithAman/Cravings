@@ -15,24 +15,22 @@ import RiderDashboard from "./pages/dashboard/RiderDashboard";
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <Toaster />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/register/:userType" element={<Register />} />
-          <Route path="/contact-Us" element={<ContactUs />} />
+      <Toaster />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/register/:userType" element={<Register />} />
+        <Route path="/contact-Us" element={<ContactUs />} />
 
-          {/* dashborad routes */}
-          <Route path="/customer/dashboard" element={<CustomerDashborad/>} />
-          <Route path="/admin/dashboard" element={<AdminDashboard/>} />
-          <Route path="/restaurant/dashboard" element={<RestaurantDashboard/>} />
-          <Route path="/rider/dashboard" element={<RiderDashboard/>} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+        {/* dashborad routes */}
+        <Route path="/customer/dashboard" element={<CustomerDashborad />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/restaurant/dashboard" element={<RestaurantDashboard />} />
+        <Route path="/rider/dashboard" element={<RiderDashboard />} />
+      </Routes>
+      <Footer />
     </>
   );
 };
