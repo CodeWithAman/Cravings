@@ -19,7 +19,7 @@ const PresonalInformation = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [profilePicPreview, setProfilePicPreview] = useState(null);
   const [profileFormData, setProfileFormData] = useState({
-    fullName: user?.fullName || "",
+    fullname: user?.fullname || "",
     email: user?.email || "",
     phone: user?.phone || "",
   });
@@ -34,7 +34,7 @@ const PresonalInformation = () => {
       setIsLoading(true);
 
       const payload = new FormData();
-      payload.append("fullName", profileFormData.fullName);
+      payload.append("fullname", profileFormData.fullname);
       payload.append("email", profileFormData.email.toLowerCase());
       payload.append("phone", profileFormData.phone);
 
@@ -56,7 +56,7 @@ const PresonalInformation = () => {
 
   const handleCancelProfile = () => {
     setProfileFormData({
-      fullName: user.fullName,
+      fullname: user.fullname,
       email: user.email,
       phone: user.phone,
     });
@@ -149,8 +149,8 @@ const PresonalInformation = () => {
                   <label className="text-xs font-semibold">Full Name</label>
                   <input
                     type="text"
-                    name="fullName"
-                    value={profileFormData.fullName}
+                    name="fullname"
+                    value={profileFormData.fullname}
                     onChange={handleProfileChange}
                     className={`w-full px-1.5 py-1 border border-(--color-secondary) ${editingProfile ? "bg-white" : "bg-(--color-base-100)"} rounded`}
                     disabled={!editingProfile}
