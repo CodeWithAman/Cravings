@@ -20,7 +20,7 @@ export const RestaurantGetData = async (req, res, next) => {
       return next(error);
     }
 
-    const restaurantData = await Restaurant.find({ managerId });
+    const restaurantData = await Restaurant.findOne({ managerId });
 
     if (restaurantData) {
       res.status(200).json({
@@ -162,11 +162,9 @@ export const RestaurantUpdateInfo = async (req, res, next) => {
     const cuisineTypesArray = cuisineTypes
       .split(",")
       .map((type) => type.trim());
-
     const existingRestaurant = await Restaurant.findOne({
       managerId: currentUser._id,
     });
-
     if (!existingRestaurant) {
       const newRestaurant = await Restaurant.create({
         managerId: currentUser._id,
@@ -213,6 +211,8 @@ export const OpenRestaurant = async (req, res, next) => {
     const currentUser = req.user;
 
     const OpenStatus = req.params.openStatus;
+
+    console.log("Open Status is", OpenStatus);
 
     const existingRestaurant = await Restaurant.findOne({
       managerId: currentUser._id,
