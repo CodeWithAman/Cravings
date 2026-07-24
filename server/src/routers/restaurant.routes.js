@@ -1,6 +1,12 @@
 import express from "express";
 import multer from "multer";
-import { RestaurantUpdateProfile , RestaurantGetData } from "../controllers/restaurant.controller.js";
+import {
+  RestaurantUpdateProfile,
+  RestaurantGetData,
+  RestaurantUpdateInfo,
+  OpenRestaurant,
+  RestaurantUpdateLegalInfo,
+} from "../controllers/restaurant.controller.js";
 import { RestaurantAuthProtect } from "../middlewares/auth.middleware.js";
 
 const upload = multer();
@@ -32,6 +38,6 @@ router.put(
   "/update-legal-info",
   RestaurantAuthProtect,
   RestaurantUpdateLegalInfo,
-); 
+);
 
 export default router;
