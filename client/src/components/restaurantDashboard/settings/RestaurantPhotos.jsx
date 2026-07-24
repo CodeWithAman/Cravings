@@ -106,7 +106,7 @@ const RestaurantPhotos = () => {
     <div className="p-2">
       <div className="grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-3 items-start">
         <div className="bg-(--color-base-100) rounded-xl border border-(--color-secondary)/40 shadow-sm p-4 h-full">
-          <div className="flex items-center justify-between border-b border-(--color-secondary) pb-2 mb-2.5">
+          <div className="flex items-center justify-between border-b border-(--color-secondary) pb-2 mb-3">
             <div className="">
               <h3 className="text-sm font-semibold text-(--color-primary)">
                 Cover Image
@@ -165,7 +165,7 @@ const RestaurantPhotos = () => {
               </div>
             ) : (
               <div className="rounded-xl border border-dashed border-(--color-secondary) bg-linear-to-br from-white to-(--color-base-100) px-4 py-8 text-center">
-                <div className="mx-auto mb-2.5 flex h-14 w-14 items-center justify-center rounded-full bg-(--color-primary)/10 text-(--color-primary)">
+                <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-(--color-primary)/10 text-(--color-primary)">
                   <MdOutlineAddAPhoto className="text-2xl" />
                 </div>
                 <p className="text-sm font-semibold text-(--color-primary)">
@@ -180,7 +180,7 @@ const RestaurantPhotos = () => {
         </div>
 
         <div className="bg-(--color-base-100) rounded-xl border border-(--color-secondary)/40 shadow-sm p-4 h-full">
-          <div className="flex items-start justify-between gap-3 border-b border-(--color-secondary) mb-2.5">
+          <div className="flex items-start justify-between gap-3 border-b border-(--color-secondary) mb-3">
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-sm font-semibold text-(--color-primary)">
@@ -216,7 +216,7 @@ const RestaurantPhotos = () => {
           </div>
 
           {errors.gallery && (
-            <div className="mb-2.5 rounded-lg border border-(--color-error)/30 bg-(--color-error)/5 px-3 py-2">
+            <div className="mb-3 rounded-lg border border-(--color-error)/30 bg-(--color-error)/5 px-3 py-2">
               <p className="text-xs text-(--color-error)">{errors.gallery}</p>
             </div>
           )}
@@ -257,7 +257,7 @@ const RestaurantPhotos = () => {
             </div>
           ) : (
             <div className="rounded-xl border border-dashed border-(--color-secondary) bg-linear-to-br from-white to-(--color-base-100) px-4 py-10 text-center">
-              <div className="mx-auto mb-2.5 flex h-14 w-14 items-center justify-center rounded-full bg-(--color-primary)/10 text-(--color-primary)">
+              <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-(--color-primary)/10 text-(--color-primary)">
                 <MdOutlineAddAPhoto className="text-2xl" />
               </div>
               <p className="text-sm font-semibold text-(--color-primary)">
