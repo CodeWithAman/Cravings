@@ -68,7 +68,7 @@ const Home = () => {
       }
     };
 
-    loadRestaurants();
+    // loadRestaurants();
   }, []);
 
   // Filter restaurants based on search and category
