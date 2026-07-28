@@ -56,7 +56,7 @@ export const uploadSingleImage = async (image, storageLocation) => {
       publicId: result.public_id,
     };
   } catch (error) {
-    console.log(error.message);
+    console.log("uploadSingleImage error details:", error);
     throw error;
   }
 };
