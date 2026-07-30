@@ -129,14 +129,15 @@ const Home = () => {
               Order from thousands of restaurants and get it delivered to your
               doorstep
             </p>
-            {!user && (
+            
               <div className="flex gap-4 justify-center">
-                <button
+               {!user && ( <button
                   onClick={() => navigate("/register/customer")}
                   className="bg-(--color-primary) text-(--color-primary-content) px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition"
                 >
                   Sign Up
                 </button>
+                )}
                 <button
                   onClick={() => navigate("/order-now")}
                   className="bg-(--color-base-100) text-(--color-base-content) px-8 py-3 rounded-lg font-semibold hover:bg-(--color-base-200) transition"
@@ -144,7 +145,7 @@ const Home = () => {
                   Order Now
                 </button>
               </div>
-            )}
+            
           </div>
 
           {/* Search and Location Bar */}
