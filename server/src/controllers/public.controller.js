@@ -1,10 +1,11 @@
 import ContactUs from "../models/contact.model.js";
+import Restaurant from "../models/restaurant.model.js";
+import Menu from "../models/menu.model.js";
 
 export const ContactUsForm = async (req, res, next) => {
   try {
-    
     const { fullname, email, phone, subject, message } = req.body;
-    
+
     if (!fullname || !email || !phone || !subject || !message) {
       const error = new Error("All Feilds Required");
       error.statusCode = 400;
@@ -19,11 +20,43 @@ export const ContactUsForm = async (req, res, next) => {
       message,
     });
 
-    res
-      .status(201)
-      .json({
-        message: "Thanks for Contacting Us! You will hear back from us soon",
-      });
+    res.status(201).json({
+      message: "Thanks for Contacting Us! You will hear back from us soon",
+    });
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+};
+
+export const GetAllRestaurants = async (req, res, next) => {
+  try {
+    const restaurants = await Restaurant.find();
+    res.status(200).json({ data: restaurants });
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+};
+
+export const GetRestaurantDetails = async (req, res, next) => {
+  try {
+    const { restaurantId } = req.params;
+
+    const restaurantDetails = await Menu.findOne({ restaurantId }).populate({
+      path: "restaurantId",
+      populate: {
+        path: "managerId",
+      },
+    });
+
+    if (!restaurantDetails) {
+      const error = new Error("Restaurant not found");
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    res.status(200).json({ data: restaurantDetails });
   } catch (error) {
     console.log(error.message);
     next();
