@@ -17,8 +17,8 @@ import {
   RestaurantUpdateSocialMediaLinks,
   RestaurantUpdateCoverPhoto,
   RestaurantUpdateRestaurantImages,
-} from "../controller/restaurant.controller.js";
-import { RestaurantAuthProtect } from "../middleware/auth.middelware.js";
+} from "../controllers/restaurant.controller.js";
+import { RestaurantAuthProtect } from "../middlewares/auth.middleware.js";
 
 const upload = multer();
 const router = express.Router();
