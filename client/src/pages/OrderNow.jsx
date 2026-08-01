@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { IoSearch, IoStar } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import api from "../config/api.config.js";
 import toast from "react-hot-toast";
@@ -10,22 +11,38 @@ const OrderNow = () => {
   const navigate = useNavigate();
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-//   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchRestaurants = async () => {
     try {
       setIsLoading(true);
       const response = await api.get("/public/restaurants");
-      setRestaurants(response.data.data);
+      setRestaurants(response.data.data || []);
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred during fetching restaurants. Please try again.",
+        "Unknown error occurred during fetching restaurants. Please try again.",
       );
     } finally {
       setIsLoading(false);
     }
   };
+
+  const filteredRestaurants = useMemo(() => {
+    if (!searchQuery.trim()) return restaurants;
+
+    const query = searchQuery.toLowerCase();
+    return restaurants.filter((restaurant) => {
+      const name = restaurant.restaurantName?.toLowerCase() || "";
+      const description = restaurant.description?.toLowerCase() || "";
+      const cuisines = (restaurant.cuisineTypes || []).join(" ").toLowerCase();
+      return (
+        name.includes(query) ||
+        description.includes(query) ||
+        cuisines.includes(query)
+      );
+    });
+  }, [restaurants, searchQuery]);
 
   const handleRestaurant = (restaurant) => {
     navigate(`/restaurant-details/${restaurant._id}`);
