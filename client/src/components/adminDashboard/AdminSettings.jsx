@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../context/AuthContext.jsx";
+import { MdEdit } from "react-icons/md";
+import { MdOutlineLockReset } from "react-icons/md";
+import { useAuth } from "../../context/AuthContext";
 import api from "../../config/api.config.js";
 import toast from "react-hot-toast";
-import { MdOutlineAddAPhoto, MdEdit, MdOutlineLockReset } from "react-icons/md";
-import PasswordChangeModal from "../commonModals/PasswordChangeModal.jsx";
+import { MdOutlineAddAPhoto } from "react-icons/md";
+import PasswordChangeModal from "../commonModals/PasswordChangeModal";
 
-const AdminSettings = () => {
+const AdminSetting = () => {
   const { user, setUser } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-
-
-  const [isEditable, setIsEditable] = useState(false);
+  const [editingProfile, setEditingProfile] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
-  const [profilePicPreview, setProfilePreview] = useState(null);
-  const [isPasswordChangeModelOpen, setIsPasswordChangeModelOpen] =
+  const [profilePicPreview, setProfilePicPreview] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPasswordChangeModalOpen, setIsPasswordChangeModalOpen] =
     useState(false);
 
   const [formData, setFormData] = useState({
@@ -22,9 +22,10 @@ const AdminSettings = () => {
     phone: user?.phone || "",
   });
 
-  const handleChange = (e) => {
+  // Profile handlers
+  const handleProfileChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSaveProfile = async () => {
@@ -40,32 +41,31 @@ const AdminSettings = () => {
 
       const response = await api.put(`/common/edit-profile`, payload);
 
-      const updatedUser = response.data.data;
-      setUser(updatedUser);
-      sessionStorage.setItem("cravingUser", JSON.stringify(updatedUser));
+      setUser(response.data.data);
+      sessionStorage.setItem("cravingUser", JSON.stringify(response.data.data));
 
-      setIsEditable(false);
-      toast.success("Profile updated sucessfully!");
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update profile");
+      setEditingProfile(false);
+      toast.success("Profile updated successfully!");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to update profile");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleCancel = () => {
+  const handleCancelProfile = () => {
     setFormData({
       fullname: user.fullname,
       email: user.email,
       phone: user.phone,
     });
-    setProfilePreview(null);
-    setIsEditable(false);
+    setProfilePicPreview(null);
+    setEditingProfile(false);
   };
 
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
-    setProfilePreview(URL.createObjectURL(file));
+    setProfilePicPreview(URL.createObjectURL(file));
     setProfilePic(file);
   };
 
@@ -73,20 +73,20 @@ const AdminSettings = () => {
     <>
       <div className="overflow-y-auto h-full p-6 space-y-6">
         {/* User Profile Section */}
-        <div className="bg-(--color-base-200) rounded-lg p-3">
+        <div className="bg-(--color-base-200) rounded-lg p-6">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold">Profile Information</h3>
-            {!isEditable ? (
-              <div className=" flex gap-3">
+            {!editingProfile ? (
+              <div className="flex gap-3">
                 <button
-                  onClick={() => setIsEditable(true)}
-                  className=" flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm hover:bg-(--color-primary) hover:text-(--color-primary-content)"
+                  onClick={() => setEditingProfile(true)}
+                  className="flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm"
                 >
                   <MdEdit /> Edit
                 </button>
                 <button
-                  onClick={() => setIsPasswordChangeModelOpen(true)}
-                  className=" flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-3 py-1 rounded text-sm hover:bg-(--color-primary) hover:text-(--color-primary-content)"
+                  onClick={() => setIsPasswordChangeModalOpen(true)}
+                  className="flex items-center gap-2 border border-(--color-primary) text-(--color-primary) px-3 py-1 rounded text-sm hover:bg-(--color-primary) hover:text-(--color-primary-content)"
                 >
                   <MdOutlineLockReset /> Change Password
                 </button>
@@ -101,7 +101,7 @@ const AdminSettings = () => {
                   {isLoading ? "Saving..." : "Save Changes"}
                 </button>
                 <button
-                  onClick={handleCancel}
+                  onClick={handleCancelProfile}
                   className="flex items-center gap-2 bg-(--color-secondary) text-(--color-secondary-content) px-3 py-1 rounded text-sm"
                   disabled={isLoading}
                 >
@@ -114,7 +114,7 @@ const AdminSettings = () => {
           <div>
             <div className="flex items-center gap-6">
               <div className="relative">
-                <div className="w-25 h-25">
+                <div className="w-36 h-36">
                   <img
                     src={profilePicPreview || user.photo.url}
                     alt="Profile"
@@ -122,7 +122,7 @@ const AdminSettings = () => {
                   />
                 </div>
 
-                {isEditable && (
+                {editingProfile && (
                   <div
                     className="absolute cursor-pointer bottom-1 right-1 border p-2 rounded-full w-fit bg-(--color-base-200)"
                     title="Change Photo"
@@ -143,65 +143,57 @@ const AdminSettings = () => {
               </div>
 
               <div className="space-y-4 w-full">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="w-full">
-                    <label className="block text-sm font-semibold mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      name="fullname"
-                      value={formData.fullname}
-                      onChange={handleChange}
-                      className={`w-full px-1.5 py-1 border border-(--color-secondary) ${isEditable ? "bg-(--color-base-100)" : "bg-(--color-base-200)"} rounded`}
-                      disabled={!isEditable}
-                    />
-                  </div>
+                <div className="grid grid-cols-5 gap-2 justify-center items-center">
+                  <label className="block text-sm font-semibold mb-2">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="fullname"
+                    value={formData.fullname}
+                    onChange={handleProfileChange}
+                    className={`w-full px-3 py-2 border ${editingProfile ? "border-(--color-secondary)" : "border-transparent"} rounded col-span-4`}
+                    disabled={!editingProfile}
+                  />
 
-                  <div className="w-full">
-                    <label className="block text-sm font-semibold mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={`w-full px-1.5 py-1 border border-(--color-secondary) disabled:bg-(--secondary) cursor-not-allowed  rounded`}
-                      disabled
-                    />
-                  </div>
+                  <label className="block text-sm font-semibold mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleProfileChange}
+                    className={`w-full px-3 py-2 border ${editingProfile ? "border-(--color-secondary) text-(--color-secondary) disabled:bg-(--color-secondary)/50 cursor-not-allowed" : "border-transparent"} rounded col-span-4`}
+                    disabled
+                  />
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-2">
-                      Phone
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className={`w-full px-1.5 py-1 border border-(--color-secondary) ${isEditable ? "bg-(--color-base-100)" : "bg-(--color-base-200)"} rounded`}
-                      disabled={!isEditable}
-                    />
-                  </div>
+                  <label className="block text-sm font-semibold mb-2">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleProfileChange}
+                    className={`w-full px-3 py-2 border ${editingProfile ? "border-(--color-secondary)" : "border-transparent"} rounded col-span-4`}
+                    disabled={!editingProfile}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Admin Info Section  */}
       </div>
 
-      {isPasswordChangeModelOpen && (
+      {isPasswordChangeModalOpen && (
         <PasswordChangeModal
-          open={isPasswordChangeModelOpen}
-          onClose={() => setIsPasswordChangeModelOpen(false)}
+          open={isPasswordChangeModalOpen}
+          onClose={() => setIsPasswordChangeModalOpen(false)}
         />
       )}
     </>
   );
 };
 
-export default AdminSettings;
+export default AdminSetting;
