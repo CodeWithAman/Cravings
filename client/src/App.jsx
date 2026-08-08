@@ -13,6 +13,7 @@ import RestaurantDashboard from "./pages/dashboard/RestaurantDashboard";
 import RiderDashboard from "./pages/dashboard/RiderDashboard";
 import OrderNow from "./pages/OrderNow";
 import RestaurantDetails from "./pages/RestaurantDetails";
+import Cart from "./components/Cart";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/rider/dashboard" element={<RiderDashboard />} />
         <Route path="/order-now" element={<OrderNow />} />
         <Route path="/restaurant-details/:restaurantId" element={<RestaurantDetails />} />
+        <Route path="/cart" element={<Cart/>}/>
       </Routes>
       <Footer />
     </>
