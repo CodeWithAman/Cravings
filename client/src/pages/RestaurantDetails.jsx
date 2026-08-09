@@ -10,7 +10,7 @@ import RestaurantInfoStrip from "../components/publicRestaurantDetails/Restaurnt
 import RestaurantAbout from "../components/publicRestaurantDetails/RestaurntAbout.jsx";
 import RestaurantGallery from "../components/publicRestaurantDetails/RestaurntGallery.jsx";
 import RestaurantContact from "../components/publicRestaurantDetails/RestaurntContact.jsx";
-import RestaurantSocialLinks from "../components/publicRestaurantDetails/RestaurntSocialMediaLinks.jsx";
+import RestaurantSocialLinks from "../components/publicRestaurantDetails/RestaurntSocialMedia.jsx";
 import RestaurantMenu from "../components/publicRestaurantDetails/RestaurntMenu.jsx";
 
 const RestaurantDetailsPage = () => {
@@ -29,7 +29,7 @@ const RestaurantDetailsPage = () => {
       } catch (error) {
         toast.error(
           error.response?.data?.message ||
-            "Failed to load restaurant details. Please try again.",
+          "Failed to load restaurant details. Please try again.",
         );
       } finally {
         setIsLoading(false);
@@ -72,7 +72,11 @@ const RestaurantDetailsPage = () => {
         </div>
 
         {/* Right: Menu */}
-        <RestaurantMenu menuItems={details.menuItems} />
+        <RestaurantMenu
+          menuItems={details.menuItems}
+          restaurantId={restaurantId}
+          restaurantName={restaurant.restaurantName}
+        />
       </div>
     </div>
   );
