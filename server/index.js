@@ -1,4 +1,4 @@
-import  cloudinary from "./src/config/cloudinary.config.js"
+import cloudinary from "./src/config/cloudinary.config.js";
 import express from "express";
 import connectDB from "./src/config/dbConnection.config.js";
 import AuthRouter from "./src/routers/auth.routes.js";
@@ -8,17 +8,17 @@ import AdminRouter from "./src/routers/admin.route.js";
 import RestaurantRouter from "./src/routers/restaurant.routes.js";
 import CustomerRouter from "./src/routers/customer.route.js";
 import RiderRouter from "./src/routers/rider.route.js";
-import OrderRouter from "./src/routers/order.route,js"
-import PaymentRouter from "./src/routers/payment.route,js"
+import OrderRouter from "./src/routers/order.route,js";
+import PaymentRouter from "./src/routers/payment.route,js";
 import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" , credentials: true }));
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.use(morgan("dev"));
 
@@ -27,11 +27,11 @@ app.use("/public", PublicRouter);
 app.use("/common", CommonRouter);
 
 app.use("/admin", AdminRouter);
-app.use("/restaurant", RestaurantRouter)
+app.use("/restaurant", RestaurantRouter);
 app.use("/customer", CustomerRouter);
 app.use("/rider", RiderRouter);
-app.use("/order", OrderRouter)
-app.use("/payment", PaymentRouter)
+app.use("/order", OrderRouter);
+app.use("/payment", PaymentRouter);
 
 // default API
 app.get("/", (req, res) => {
@@ -49,15 +49,15 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000; // verify the port
 
-app.listen(port,async () => {
+app.listen(port, async () => {
   console.log("Server Strated on PORT:", port); //
   connectDB();
   try {
-    const result = await cloudinary.api.ping()
+    const result = await cloudinary.api.ping();
     console.log("Cloudinary Connected :");
     console.log(result);
   } catch (error) {
     console.log(error.message);
-    process.exit(1)
+    process.exit(1);
   }
 });
