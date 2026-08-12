@@ -12,8 +12,10 @@ import RestaurantGallery from "../components/publicRestaurantDetails/RestaurntGa
 import RestaurantContact from "../components/publicRestaurantDetails/RestaurntContact.jsx";
 import RestaurantSocialLinks from "../components/publicRestaurantDetails/RestaurntSocialMedia.jsx";
 import RestaurantMenu from "../components/publicRestaurantDetails/RestaurntMenu.jsx";
+import { useCart } from "../context/CartContext.jsx";
 
 const RestaurantDetailsPage = () => {
+  const { cart, totalItems, totalPrice, clearCart } = useCart();
   const { restaurantId } = useParams();
   const navigate = useNavigate();
 
@@ -58,7 +60,7 @@ const RestaurantDetailsPage = () => {
   const restaurant = details.restaurantId;
 
   return (
-    <div className="min-h-screen bg-(--color-base-200)">
+    <div className="min-h-screen bg-(--color-base-200) relative">
       <RestaurantHero restaurant={restaurant} onBack={() => navigate(-1)} />
       <RestaurantInfoStrip restaurant={restaurant} />
 
@@ -68,16 +70,37 @@ const RestaurantDetailsPage = () => {
           <RestaurantAbout description={restaurant.description} />
           <RestaurantGallery images={restaurant.restaurantImage} />
           <RestaurantContact restaurant={restaurant} />
-          <RestaurantSocialLinks socialMediaLinks={restaurant.socialMediaLinks} />
+          <RestaurantSocialLinks
+            socialMediaLinks={restaurant.socialMediaLinks}
+          />
         </div>
 
         {/* Right: Menu */}
         <RestaurantMenu
           menuItems={details.menuItems}
-          restaurantId={restaurantId}
+          restaurantId={restaurant._id}
           restaurantName={restaurant.restaurantName}
         />
       </div>
+
+      {cart && totalItems > 0 && (
+        <div className="fixed w-full bottom-5 flex items-center justify-center">
+          <div className=" border bg-(--color-primary) text-(--color-primary-content) ps-4 pe-2 py-2 rounded-full w-4xl flex justify-between items-center">
+            <div>Total items : {totalItems}</div>
+
+            <div className="flex items-center gap-2">
+              <div>Total Amount : {totalPrice}</div>
+              <span>|</span>
+              <button
+                className="bg-(--color-primary-content) text-(--color-primary) p-2 rounded-full"
+                onClick={() => navigate("/cart")}
+              >
+                Proceed to checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
