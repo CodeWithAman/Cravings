@@ -56,7 +56,7 @@ const PasswordChangeModal = ({ open, onClose }) => {
         className="fixed inset-0 z-999 bg-black/60 backdrop-blur-xs flex justify-center items-center"
         // onClick={handleCloseModal}
       >
-        <div className="bg-white w-xl rounded-xl shadow max-h-[80vh] overflow-y-auto relative">
+        <div className="bg-white w-xl rounded shadow max-h-[80vh] overflow-y-auto relative">
           <header className="flex justify-between p-4 border-b border-(--color-secondary)">
             <div className="font-bold text-xl text-(--color-primary)">
               Change Password
@@ -100,7 +100,7 @@ const PasswordChangeModal = ({ open, onClose }) => {
                   Confirm New Password
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   id="confirmNewPassword"
                   name="confirmNewPassword"
                   value={formData.confirmNewPassword}
