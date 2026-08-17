@@ -62,7 +62,7 @@ const Index = () => {
 
   return (
     <>
-      <div className="bg-(--color-base-100) rounded-lg p-3 flex items-center gap-3">
+      <div className="bg-(--color-base-100) rounded-lg p-4 flex items-center gap-3">
         <div className="relative">
           <div className="w-26 h-26">
             <img

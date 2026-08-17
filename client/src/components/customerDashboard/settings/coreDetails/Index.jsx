@@ -111,7 +111,7 @@ const Index = () => {
   const typeColors = { home: "bg-green-100 text-green-700", work: "bg-blue-100 text-blue-700", other: "bg-gray-100 text-gray-700" };
 
   return (
-    <div className="bg-(--color-base-100) rounded-lg p-3">
+    <div className="bg-(--color-base-100) rounded-lg p-4">
       <div className="flex justify-between items-center border-b border-(--color-secondary) pb-2 mb-2">
         <div className="flex items-center gap-3">
           <h3 className="text-sm font-semibold text-(--color-primary)">Address Book</h3>
