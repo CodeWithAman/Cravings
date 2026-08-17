@@ -15,7 +15,7 @@ const CustomerOrders = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred during fetching orders. Please try again.",
+        "Unknown error occurred during fetching orders. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -46,17 +46,26 @@ const CustomerOrders = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-(--color-secondary)">
-                <td
-                  colSpan="5"
-                  className="text-center py-4 text-(--color-neutral)"
-                >
-                  {orders && orders.length === 0
-                    ? "No orders found." 
-                    : "Loading orders..." }
-
-                </td>
-              </tr>
+              {!orders || orders.length === 0 ? (
+                <tr className="border-b border-(--color-secondary)">
+                  <td
+                    colSpan="5"
+                    className="text-center py-4 text-(--color-neutral)"
+                  >
+                    {!orders ? "Loading orders..." : "No orders found."}
+                  </td>
+                </tr>
+              ) : (
+                orders.map((order) => (
+                  <tr key={order._id} className="border-b border-(--color-secondary)">
+                    <td className="py-2">{order._id}</td>
+                    <td className="py-2">{order.restaurantId?.restaurantName || "N/A"}</td>
+                    <td className="py-2">₹{order.billDetails?.finalAmount || order.billDetails?.totalAmount || 0}</td>
+                    <td className="py-2 capitalize">{order.orderStatus}</td>
+                    <td className="py-2">{new Date(order.createdAt).toLocaleDateString()}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
