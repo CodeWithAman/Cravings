@@ -84,7 +84,7 @@ const RestaurantAddress = () => {
 
   return (
     <>
-      <div className="bg-(--color-base-100) rounded-lg p-3">
+      <div className="bg-(--color-base-100) rounded-lg p-2">
         <div className="flex justify-between items-center border-b border-(--color-secondary) pb-2 mb-2">
           <div className="flex items-center gap-3">
             <h3 className="w-full text-sm font-semibold text-(--color-primary)">
@@ -130,7 +130,7 @@ const RestaurantAddress = () => {
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 justify-center items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 justify-center items-center">
           <div className="w-full">
             <label className="text-xs font-semibold">Address</label>
             <input

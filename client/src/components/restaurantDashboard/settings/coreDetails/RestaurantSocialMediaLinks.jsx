@@ -64,7 +64,7 @@ const RestaurantSocialMediaLinks = () => {
 
   return (
     <>
-      <div className="bg-(--color-base-100) rounded-lg p-3 flex flex-col">
+      <div className="bg-(--color-base-100) rounded-lg p-2 flex flex-col">
         <div className="flex justify-between items-center mb-2">
           <label className="text-sm font-semibold text-(--color-primary)">
             Social Media Links
